@@ -70,9 +70,12 @@ class WeekLogs:
 # HELPERS
 # -------------------------------------------------------------------
 
-def get_start_end_of_current_week():
+def get_start_end_of_current_week() -> tuple[datetime.date, datetime.date]:
+    """
+    Return two `datetime.date` objects representing Monday and Sunday for the current week.
+    """
     today = datetime.date.today()
-    start = today - datetime.timedelta(days=today.weekday())        # Monday
+    start = today - datetime.timedelta(days=today.weekday())
     end = start + datetime.timedelta(days=6)
     return start, end
 
@@ -85,7 +88,7 @@ def iso_date(dt):
 # JIRA FUNCTIONS
 # -------------------------------------------------------------------
 
-def fetch_jira_worklogs_for_week(start_date, end_date):
+def fetch_jira_worklogs_for_week(start_date: datetime.date, end_date: datetime.date):
     """
     Queries Jira for all work logs for the current user within this week.
     """
