@@ -13,32 +13,32 @@ This script:
 4. Compares Jira tasks (with hours) vs Actitime task codes
 5. Reports all missing hours to Actitime using the Actitime API
 6. Logs results for transparency
-
--------------------------------------------------------------
-Configuration Required:
-- JIRA_DOMAIN
-- JIRA_EMAIL
-- JIRA_API_TOKEN
-- ACTITIME_DOMAIN
-- ACTITIME_API_TOKEN
--------------------------------------------------------------
 """
 
-import requests
 import datetime
+import json
 from collections import defaultdict
 from dataclasses import dataclass, field
+
+import requests
+
 
 # -------------------------------------------------------------------
 # CONFIGURATION
 # -------------------------------------------------------------------
 
-JIRA_DOMAIN = "https://yourcompany.atlassian.net"
-JIRA_EMAIL = "your.email@company.com"
-JIRA_API_TOKEN = "your_jira_api_token"
+@dataclass
+class Config:
+    jira_domain: str
+    jira_email: str
+    jira_api_token: str
+    actitime_domain: str
+    actitime_basic_auth: str
+    """API v1 supports only basic authentication."""
 
-ACTITIME_DOMAIN = "https://yourcompany.actitime.com"
-ACTITIME_BASIC_AUTH = "your_actitime_basic_auth"
+with open("config.json", encoding="utf-8") as f:
+    CONFIG = Config(**json.load(f))
+
 
 # -------------------------------------------------------------------
 # DATA MODELS
@@ -97,14 +97,14 @@ def fetch_jira_worklogs_for_week(start_date: datetime.date, end_date: datetime.d
         f'worklogDate >= "{iso_date(start_date)}" AND worklogDate <= "{iso_date(end_date)}"'
     )
 
-    url = f"{JIRA_DOMAIN}/rest/api/3/search"
+    url = f"{CONFIG.jira_domain}/rest/api/3/search"
     headers = {"Accept": "application/json"}
     params = {"jql": jql, "fields": "worklog,issuetype"}
 
     resp = requests.get(
         url,
         headers=headers,
-        auth=(JIRA_EMAIL, JIRA_API_TOKEN),
+        auth=(CONFIG.jira_email, CONFIG.jira_api_token),
         params=params
     )
     resp.raise_for_status()
@@ -137,8 +137,8 @@ def fetch_actitime_open_tasks():
     """
     Returns all open Actitime tasks the user can book time on.
     """
-    url = f"{ACTITIME_DOMAIN}/api/v1/tasks"
-    headers = {"Authorization": f"Basic {ACTITIME_BASIC_AUTH}"}
+    url = f"{CONFIG.actitime_domain}/api/v1/tasks"
+    headers = {"Authorization": f"Basic {CONFIG.actitime_basic_auth}"}
 
     resp = requests.get(url, headers=headers)
     resp.raise_for_status()
@@ -152,8 +152,8 @@ def post_actitime_time_entry(task_id, date, hours):
     """
     Sends a time entry to Actitime.
     """
-    url = f"{ACTITIME_DOMAIN}/api/v1/time-entries"
-    headers = {"Authorization": f"Basic {ACTITIME_BASIC_AUTH}", "Content-Type": "application/json"}
+    url = f"{CONFIG.actitime_domain}/api/v1/time-entries"
+    headers = {"Authorization": f"Basic {CONFIG.actitime_basic_auth}", "Content-Type": "application/json"}
 
     payload = {
         "taskId": task_id,
@@ -215,4 +215,6 @@ def sync_jira_to_actitime():
 
 if __name__ == "__main__":
     #sync_jira_to_actitime()
-    fetch_actitime_open_tasks()
+
+    result = fetch_actitime_open_tasks()
+    print(result)

@@ -8,6 +8,11 @@ pip install -r requirements.txt
 ```
 
 
+## Configure
+1. Rename `config.sample.json` to `config.json`
+2. Replace the auth values with you own
+
+
 ## Run
 ```sh
 python main.py
