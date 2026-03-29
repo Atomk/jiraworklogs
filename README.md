@@ -1,4 +1,28 @@
-Initial version generated with Copilot.
+## Setup
+Requires Python >= `3.9`.
+```sh
+python3.9 -m venv .venv
+source .venv/bin/activate
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+
+## Run
+```sh
+python main.py
+```
+
+
+## Test
+```sh
+pytest
+```
+
+
+## LLM Disclaimer
+
+Initial version generated with Copilot, see first commit.
 
 Prompt:
 > You are a Python developer, and your company requires you to report worked hours both on Jira and on Actitime, but to save time you want to only report times on one service and use a script to take that data and report it on the other service.
