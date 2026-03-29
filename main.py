@@ -14,9 +14,11 @@ This script:
 5. Reports all missing hours to Actitime using the Actitime API
 6. Logs results for transparency
 """
+from __future__ import annotations
 
 import datetime
 import json
+import re
 from collections import defaultdict
 from dataclasses import dataclass, field
 
@@ -78,6 +80,23 @@ def get_start_end_of_current_week() -> tuple[datetime.date, datetime.date]:
     start = today - datetime.timedelta(days=today.weekday())
     end = start + datetime.timedelta(days=6)
     return start, end
+
+
+def actitime_task_name_to_jira_prefix(name: str) -> str | None:
+    """
+    Given the name of a task on Actitime, determines the name or the key of the
+    corresponding work item on Jira. If the name is malformed or not handled,
+    returns None.
+    """
+    if name.lower().startswith("meeting") or name.lower().startswith("sprint meeting"):
+        # We use a single Jira item to track all meetings
+        jira_prefix = "Meetings"
+    elif match := re.match(r"ET-\d+", name):
+        # Task key
+        jira_prefix = match[0]
+    else:
+        jira_prefix = None
+    return jira_prefix
 
 
 # -------------------------------------------------------------------
@@ -242,6 +261,14 @@ def main():
 
     monday, sunday = get_start_end_of_current_week()
     timetrack = actitime_get_timetrack(user_id, monday)
+
+    print("Actitime tasks with recorded time this week:")
+    for _, task_data in timetrack["tasks"].items():
+        task_name = task_data["name"]
+        jira_prefix = actitime_task_name_to_jira_prefix(task_name) or "(none)"
+        print(f"- {jira_prefix.ljust(12)} {task_name}")
+
+    print()
 
     print_timetrack(timetrack)
 
