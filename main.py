@@ -80,10 +80,6 @@ def get_start_end_of_current_week() -> tuple[datetime.date, datetime.date]:
     return start, end
 
 
-def iso_date(dt):
-    return dt.strftime("%Y-%m-%d")
-
-
 # -------------------------------------------------------------------
 # JIRA FUNCTIONS
 # -------------------------------------------------------------------
@@ -94,7 +90,7 @@ def fetch_jira_worklogs_for_week(start_date: datetime.date, end_date: datetime.d
     """
     jql = (
         f'worklogAuthor = currentUser() AND '
-        f'worklogDate >= "{iso_date(start_date)}" AND worklogDate <= "{iso_date(end_date)}"'
+        f'worklogDate >= "{start_date.isoformat()}" AND worklogDate <= "{end_date.isoformat()}"'
     )
 
     url = f"{CONFIG.jira_domain}/rest/api/3/search"
@@ -185,7 +181,7 @@ def post_actitime_time_entry(task_id, date: datetime.date, hours):
 
     payload = {
         "taskId": task_id,
-        "date": iso_date(date),
+        "date": date.isoformat(),
         "duration": int(hours * 60),  # minutes
         "billable": True
     }
@@ -202,7 +198,7 @@ def sync_jira_to_actitime():
     # 1. Time range
     start, end = get_start_end_of_current_week()
 
-    print(f"Fetching Jira worklogs from {iso_date(start)} to {iso_date(end)} ...")
+    print(f"Fetching Jira worklogs from {start.isoformat()} to {end.isoformat()} ...")
     week_logs = fetch_jira_worklogs_for_week(start, end)
 
     # 2. Fetch Actitime open tasks
