@@ -133,22 +133,50 @@ def fetch_jira_worklogs_for_week(start_date: datetime.date, end_date: datetime.d
 # ACTITIME FUNCTIONS
 # -------------------------------------------------------------------
 
-def fetch_actitime_open_tasks():
-    """
-    Returns all open Actitime tasks the user can book time on.
-    """
-    url = f"{CONFIG.actitime_domain}/api/v1/tasks"
+
+def actitime_get_user_id() -> int:
+    """Get user ID of the authenticated user."""
+
+    url = f"{CONFIG.actitime_domain}/api/v1/users/me"
     headers = {"Authorization": f"Basic {CONFIG.actitime_basic_auth}"}
 
     resp = requests.get(url, headers=headers)
     resp.raise_for_status()
-    tasks = resp.json()["items"]
-
-    # Map Actitime tasks by their code (assuming task name IS the code, e.g., "ET‑432")
-    return {t["name"]: t for t in tasks if t.get("status") == "OPEN"}
+    data = resp.json()
+    return data["id"]
 
 
-def post_actitime_time_entry(task_id, date, hours):
+def actitime_get_timetrack(user_id: int, date_start: datetime.date) -> dict:
+    """Get timetrack data for a specific user, from the specified date to now."""
+
+    url = f"{CONFIG.actitime_domain}/api/v1/timetrack"
+    headers = {"Authorization": f"Basic {CONFIG.actitime_basic_auth}"}
+
+    params = {
+        "userIds": user_id,
+        "dateFrom": date_start.isoformat(), # first day, inclusive
+        "stopAfter": 1000,
+        "includeReferenced": "tasks", # include tasks data
+    }
+    resp = requests.get(url, params, headers=headers)
+    resp.raise_for_status()
+    return resp.json()
+
+
+def print_timetrack(data: dict):
+    weekday_name = ["lun", "mar", "mer", "gio", "ven", "sab", "dom"]
+    tasks = data["tasks"]
+    for day_info in data["data"]:
+        date = datetime.date.fromisoformat(day_info["date"])
+        weekday = weekday_name[date.weekday()]
+        print(f"{date.strftime('%d %b %Y')}, {weekday}")
+        for record in day_info["records"]:
+            task_id = str(record["taskId"])
+            minutes = record["time"]
+            print(f"- {minutes} min \t {tasks[task_id]['name']}")
+
+
+def post_actitime_time_entry(task_id, date: datetime.date, hours):
     """
     Sends a time entry to Actitime.
     """
@@ -213,8 +241,14 @@ def sync_jira_to_actitime():
 # ENTRY POINT
 # -------------------------------------------------------------------
 
-if __name__ == "__main__":
-    #sync_jira_to_actitime()
+def main():
+    user_id = actitime_get_user_id()
 
-    result = fetch_actitime_open_tasks()
-    print(result)
+    monday, sunday = get_start_end_of_current_week()
+    timetrack = actitime_get_timetrack(user_id, monday)
+
+    print_timetrack(timetrack)
+
+
+if __name__ == "__main__":
+    main()

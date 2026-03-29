@@ -25,6 +25,13 @@ pytest
 ```
 
 
+## Resources
+Actitime API docs:
+- https://www.actitime.com/api-documentation
+- Swagger UI
+    - after logging into you account, in the top-right corner there should be a puzzle piece icon, which is the Add-on menu. Click on it, then click on "Access actiTIME API". It should open a page at `https://<YOUR_ACTITIME_URL>/api/v1/swagger`.
+
+
 ## LLM Disclaimer
 
 Initial version generated with Copilot, see first commit.
