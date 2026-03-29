@@ -38,7 +38,7 @@ JIRA_EMAIL = "your.email@company.com"
 JIRA_API_TOKEN = "your_jira_api_token"
 
 ACTITIME_DOMAIN = "https://yourcompany.actitime.com"
-ACTITIME_API_TOKEN = "your_actitime_api_token"
+ACTITIME_BASIC_AUTH = "your_actitime_basic_auth"
 
 # -------------------------------------------------------------------
 # DATA MODELS
@@ -137,12 +137,12 @@ def fetch_actitime_open_tasks():
     """
     Returns all open Actitime tasks the user can book time on.
     """
-    url = f"{ACTITIME_DOMAIN}/api/v2/tasks"
-    headers = {"Authorization": f"Bearer {ACTITIME_API_TOKEN}"}
+    url = f"{ACTITIME_DOMAIN}/api/v1/tasks"
+    headers = {"Authorization": f"Basic {ACTITIME_BASIC_AUTH}"}
 
     resp = requests.get(url, headers=headers)
     resp.raise_for_status()
-    tasks = resp.json()
+    tasks = resp.json()["items"]
 
     # Map Actitime tasks by their code (assuming task name IS the code, e.g., "ET‑432")
     return {t["name"]: t for t in tasks if t.get("status") == "OPEN"}
@@ -152,8 +152,8 @@ def post_actitime_time_entry(task_id, date, hours):
     """
     Sends a time entry to Actitime.
     """
-    url = f"{ACTITIME_DOMAIN}/api/v2/time-entries"
-    headers = {"Authorization": f"Bearer {ACTITIME_API_TOKEN}", "Content-Type": "application/json"}
+    url = f"{ACTITIME_DOMAIN}/api/v1/time-entries"
+    headers = {"Authorization": f"Basic {ACTITIME_BASIC_AUTH}", "Content-Type": "application/json"}
 
     payload = {
         "taskId": task_id,
@@ -214,4 +214,5 @@ def sync_jira_to_actitime():
 # -------------------------------------------------------------------
 
 if __name__ == "__main__":
-    sync_jira_to_actitime()
+    #sync_jira_to_actitime()
+    fetch_actitime_open_tasks()
