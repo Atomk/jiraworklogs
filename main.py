@@ -262,6 +262,11 @@ def main():
     monday, sunday = get_start_end_of_current_week()
     timetrack = actitime_get_timetrack(user_id, monday)
 
+    if not timetrack["data"]:
+        # You cannot even get the added tasks if there's no time records
+        print("ERROR: No data in timetrack for the current week.")
+        return
+
     print("Actitime tasks with recorded time this week:")
     for _, task_data in timetrack["tasks"].items():
         task_name = task_data["name"]
