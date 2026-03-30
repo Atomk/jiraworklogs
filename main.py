@@ -15,8 +15,7 @@ import json
 import re
 from dataclasses import dataclass
 
-import requests
-
+import actitime
 import jira
 
 
@@ -72,37 +71,7 @@ def actitime_task_name_to_jira_prefix(name: str) -> str | None:
 # ACTITIME FUNCTIONS
 # -------------------------------------------------------------------
 
-
-def actitime_get_user_id() -> int:
-    """Get user ID of the authenticated user."""
-
-    url = f"{CONFIG.actitime_domain}/api/v1/users/me"
-    headers = {"Authorization": f"Basic {CONFIG.actitime_basic_auth}"}
-
-    resp = requests.get(url, headers=headers)
-    resp.raise_for_status()
-    data = resp.json()
-    return data["id"]
-
-
-def actitime_get_timetrack(user_id: int, date_start: datetime.date) -> dict:
-    """Get timetrack data for a specific user, from the specified date to now."""
-
-    url = f"{CONFIG.actitime_domain}/api/v1/timetrack"
-    headers = {"Authorization": f"Basic {CONFIG.actitime_basic_auth}"}
-
-    params = {
-        "userIds": user_id,
-        "dateFrom": date_start.isoformat(), # first day, inclusive
-        "stopAfter": 1000,
-        "includeReferenced": "tasks", # include tasks data
-    }
-    resp = requests.get(url, params, headers=headers)
-    resp.raise_for_status()
-    return resp.json()
-
-
-def actitime_print_timetrack(data: dict):
+def actitime_print_timetrack(data: actitime.ResponseTimetrack) -> None:
     weekday_name = ["lun", "mar", "mer", "gio", "ven", "sab", "dom"]
     tasks = data["tasks"]
     for day_info in data["data"]:
@@ -140,10 +109,10 @@ def jira_sprint_tasks_dictionary() -> dict[str, str]:
 # -------------------------------------------------------------------
 
 def main():
-    user_id = actitime_get_user_id()
+    user_id = actitime.get_user_id()
 
     monday, sunday = get_start_end_of_current_week()
-    timetrack = actitime_get_timetrack(user_id, monday)
+    timetrack = actitime.get_timetrack(user_id, monday)
 
     if not timetrack["data"]:
         # You cannot even get the added tasks if there's no time records
@@ -212,6 +181,7 @@ def main():
 
 
 if __name__ == "__main__":
+    actitime.init(CONFIG.actitime_domain, CONFIG.actitime_basic_auth)
     jira.init(CONFIG.jira_domain, CONFIG.jira_email, CONFIG.jira_api_token)
 
     main()
