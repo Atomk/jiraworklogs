@@ -98,17 +98,22 @@ def actitime_get_timetrack(user_id: int, date_start: datetime.date) -> dict:
     return resp.json()
 
 
-def print_timetrack(data: dict):
+def actitime_print_timetrack(data: dict):
     weekday_name = ["lun", "mar", "mer", "gio", "ven", "sab", "dom"]
     tasks = data["tasks"]
     for day_info in data["data"]:
         date = datetime.date.fromisoformat(day_info["date"])
         weekday = weekday_name[date.weekday()]
         print(f"{date.strftime('%d %b %Y')}, {weekday}")
+
+        total_minutes = 0
         for record in day_info["records"]:
             task_id = str(record["taskId"])
             minutes = record["time"]
             print(f"- {minutes} min \t {tasks[task_id]['name']}")
+            total_minutes += minutes
+        print(f"TOTAL: {total_minutes}")
+        print()
 
 
 # -------------------------------------------------------------------
@@ -134,7 +139,7 @@ def main():
 
     print()
 
-    print_timetrack(timetrack)
+    actitime_print_timetrack(timetrack)
 
 
 if __name__ == "__main__":
