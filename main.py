@@ -167,17 +167,21 @@ def main():
             found_jira_keys.add(found_jira_key)
 
     unmatched_jira_tasks = {k: v for k, v in jira_tasks.items() if k not in found_jira_keys}
-    print("The following Jira tasks have no correspondence in Actitime:")
-    for key, title in unmatched_jira_tasks.items():
-        print(f"- {key}: {title}")
-    print()
+    if unmatched_jira_tasks:
+        print("The following Jira tasks have no correspondence in Actitime's timetrack:")
+        for key, title in unmatched_jira_tasks.items():
+            print(f"- {key}: {title}")
+        print()
 
-    print("The following Actitime tasks have no correspondence in Jira's current sprint:")
+    unmatched_actitime_tasks: list[ActitimeTask] = []
     for pair in pairings:
         if pair.jira_key is None:
-            actitask = acti_tasks[pair.acti_id]
+            unmatched_actitime_tasks.append(acti_tasks[pair.acti_id])
+    if unmatched_actitime_tasks:
+        print("The following Actitime tasks have no correspondence in Jira's current sprint:")
+        for actitask in unmatched_actitime_tasks:
             print("- %s [%s] \"%s\"" % (actitask.id, actitask.jira_matcher, actitask.name))
-    print()
+        print()
 
 
 if __name__ == "__main__":
