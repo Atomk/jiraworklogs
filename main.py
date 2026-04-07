@@ -7,6 +7,7 @@ This script:
 1. Fetches user's Actitime tasks for the current week
 2. Fetches user's Jira tasks in currently active sprints
 3. Compares tasks keys to ensure each Actitime task has a corresponding Jira task
+4. Uploads worklogs to Jira for all matched tasks
 """
 from __future__ import annotations
 
@@ -104,6 +105,52 @@ def jira_sprint_tasks_dictionary() -> dict[str, str]:
     return tasks
 
 
+def jira_add_worklogs_from_actitime(
+    jira_key: str,
+    actitime_task_id: int,
+    timetrack: actitime.ResponseTimetrack
+):
+    if str(actitime_task_id) not in timetrack["tasks"]:
+        raise ValueError(f"actitime task id `{actitime_task_id}` not found in timetrack")
+
+    for day in timetrack["data"]:
+        worked_seconds = 0
+        for record in day["records"]:
+            if record["taskId"] == actitime_task_id:
+                worked_seconds = record["time"] * 60
+                break
+        if worked_seconds <= 0:
+            # no data for this task in this day
+            continue
+
+        # Endpoint errors say that datetimes must be in this format: yyyy-MM-dd'T'HH:mm:ss.SSSZ
+        # But actually the timezone must be in +HHmm format (without the colon)
+
+        # Create datetime in local timezone, convert to UTC, convert to ISO string.
+        date = datetime.date.fromisoformat(day["date"])
+        # 2026-03-30
+
+        local_tz = datetime.datetime.now().astimezone().tzinfo
+        date = datetime.datetime(
+            date.year, date.month, date.day, 8, 1, tzinfo=local_tz
+        ).astimezone(datetime.timezone.utc)
+        # 2026-03-30T06:01:00+00:00
+        # (intentionally setting 8:01 so on Jira you can see which logs were created via script)
+
+        datetime_iso = date.isoformat(timespec="milliseconds").replace("+00:00", "+0000")
+        # 2026-03-30T06:01:00.000+0000
+
+        worklog: jira.WorklogCreate = {
+            # TODO what happens if you submit two time the same?
+            #   You have duplicated worklog. Should prevent submit if task already has worklogs
+            "started": datetime_iso,
+            "timeSpentSeconds": worked_seconds,
+        }
+
+        # TODO: document response type
+        jira.add_worklog(jira_key, worklog)
+
+
 # -------------------------------------------------------------------
 # ENTRY POINT
 # -------------------------------------------------------------------
@@ -132,7 +179,6 @@ def main():
         jira_prefix = actitime_task_name_to_jira_prefix(task_name) or "(none)"
         acti_tasks[task_id] = ActitimeTask(task_id, task_name, jira_prefix)
         print(f"- {jira_prefix.ljust(12)} {task_name}")
-
     print()
 
     actitime_print_timetrack(timetrack)
@@ -182,6 +228,25 @@ def main():
         for actitask in unmatched_actitime_tasks:
             print("- %s [%s] \"%s\"" % (actitask.id, actitask.jira_matcher, actitask.name))
         print()
+
+    if unmatched_actitime_tasks or unmatched_jira_tasks:
+        print("You must fix the unmatched tasks before you can send time data to Jira")
+        return
+
+    # TODO allow to ignore some Actitime tasks (e.g. "Chores")
+
+    # TODO prevent sending data to Jira for a task that already has worklogs for that day,
+    #   otherwise running this script multiple times will create a copy of all worklogs again.
+    #   In the future I may implement the possibility to update existing worklogs.
+
+    # TODO raise error if Jira task has multiple worklogs for the same day, it may
+    #  be an issue since Actitime has one record per task per day (in the timetrack at least,
+    #  in the calendar I'm not sure but that's not supported anyway in API v1)
+
+    for pair in pairings:
+        if not pair.jira_key:
+            continue
+        jira_add_worklogs_from_actitime(pair.jira_key, int(pair.acti_id), timetrack)
 
 
 if __name__ == "__main__":

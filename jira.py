@@ -31,6 +31,15 @@ class ResponseSprint(TypedDict):
     isLast: bool
 
 
+class WorklogCreate(TypedDict):
+    # NOTE: other fields are available, but these are the ones we care about
+    started: str
+    """"Required only on worklog creation, not on update.
+    ISO format: 2021-01-17T12:34:00.000+0000"""
+    timeSpentSeconds: int
+    """The time in seconds spent working on the issue."""
+
+
 def init(base_url: str, email: str, token: str):
     global _BASE_URL, _BASIC_AUTH
     _BASE_URL = base_url
@@ -50,6 +59,25 @@ def get_tasks_current_sprint() -> ResponseSprint:
         headers=headers,
         auth=_BASIC_AUTH,
         params=params
+    )
+    resp.raise_for_status()
+    data = resp.json()
+    return data
+
+
+def add_worklog(task_key: str, data: WorklogCreate) -> dict:
+    # you can pass an issue's ID or its key
+    url = f"{_BASE_URL}/rest/api/3/issue/{task_key}/worklog"
+    headers = {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+    }
+
+    resp = requests.post(
+        url,
+        headers=headers,
+        auth=_BASIC_AUTH,
+        json=data,
     )
     resp.raise_for_status()
     data = resp.json()

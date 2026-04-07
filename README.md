@@ -1,6 +1,8 @@
 # Actitime-Jira time sync
 
-A CLI script to synchronize reported time for tasks from one platform to the other, so prevent having to independently report time no both.
+A CLI script to synchronize reported time for tasks from Actitime to Jira, so you don't have to report time manually on both.
+
+This assumes that the name of your Actitime tasks starts with the related Jira tasks's key (e.g. "IT-456").
 
 
 ## Setup
