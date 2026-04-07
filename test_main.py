@@ -54,6 +54,12 @@ def test_actitime_task_name_to_jira_prefix():
     assert main.actitime_task_name_to_jira_prefix("JJ-1489 new item encoder") == "JJ-1489"
     assert main.actitime_task_name_to_jira_prefix("JJ 1489 new item encoder") is None
     assert main.actitime_task_name_to_jira_prefix("JJ1489 new item encoder") is None
+    assert main.actitime_task_name_to_jira_prefix("ABRA-123") == "ABRA-123"
+    assert main.actitime_task_name_to_jira_prefix("abra-123") is None
+    assert main.actitime_task_name_to_jira_prefix("JJ-0") is None
+    assert main.actitime_task_name_to_jira_prefix("JJ-00") is None
+    assert main.actitime_task_name_to_jira_prefix("JJ-1") == "JJ-1"
+    assert main.actitime_task_name_to_jira_prefix("J-1") is None
 
     # Other
     assert main.actitime_task_name_to_jira_prefix("Cleanup/rebase stale branches") is None

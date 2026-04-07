@@ -57,7 +57,7 @@ def actitime_task_name_to_jira_prefix(name: str) -> str | None:
     if name.lower().startswith("meeting") or name.lower().startswith("sprint meeting"):
         # We use a single Jira item to track all meetings
         jira_prefix = "Meetings"
-    elif match := re.match(r"ET-\d+", name):
+    elif match := re.match(r"[A-Z][A-Z0-9_]+-[1-9][0-9]*", name):
         # Task key
         jira_prefix = match[0]
     else:
