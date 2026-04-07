@@ -32,6 +32,7 @@ class Config:
     actitime_domain: str
     actitime_basic_auth: str
     """API v1 supports only basic authentication."""
+    actitime_ignore_tasks: list[str]
 
 
 # -------------------------------------------------------------------
@@ -152,7 +153,7 @@ def jira_add_worklogs_from_actitime(
 # ENTRY POINT
 # -------------------------------------------------------------------
 
-def main():
+def main(config: Config):
     user_id = actitime.get_user_id()
 
     monday, sunday = get_start_end_of_current_week()
@@ -190,6 +191,9 @@ def main():
     jira_tasks = jira_sprint_tasks_dictionary()
     found_jira_keys = set()
     for _, actitask in acti_tasks.items():
+        if actitask.name in config.actitime_ignore_tasks:
+            continue
+
         found_jira_key = None
         # If the Actitime task directly references a Jira task key (in the current sprint)
         if actitask.jira_matcher in jira_tasks:
@@ -253,4 +257,4 @@ if __name__ == "__main__":
     actitime.init(CONFIG.actitime_domain, CONFIG.actitime_basic_auth)
     jira.init(CONFIG.jira_domain, CONFIG.jira_email, CONFIG.jira_api_token)
 
-    main()
+    main(CONFIG)

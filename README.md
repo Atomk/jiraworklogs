@@ -19,6 +19,8 @@ pip install -r requirements.txt
 1. Rename `config.sample.json` to `config.json`
 2. Replace the auth values with you own
 
+`actitime_ignore_tasks` is a list of names of Actitime tasks that should be ignored and not synced to Jira. This is useful to enable tracking time for chores that are not supposed to also be tracked in Jira. Leave the list empty if you don't need this.
+
 ### Actitime
 After logging in the Actitime website, the URL should look like `https://<YOUR_ACTITIME_URL>/timetrack/enter.do`. The part of the URL before `/timetrack` should be pasted into the `actitime_domain` config field.
 
