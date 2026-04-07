@@ -33,9 +33,6 @@ class Config:
     actitime_basic_auth: str
     """API v1 supports only basic authentication."""
 
-with open("config.json", encoding="utf-8") as f:
-    CONFIG = Config(**json.load(f))
-
 
 # -------------------------------------------------------------------
 # HELPERS
@@ -250,6 +247,9 @@ def main():
 
 
 if __name__ == "__main__":
+    with open("config.json", encoding="utf-8") as f:
+        CONFIG = Config(**json.load(f))
+
     actitime.init(CONFIG.actitime_domain, CONFIG.actitime_basic_auth)
     jira.init(CONFIG.jira_domain, CONFIG.jira_email, CONFIG.jira_api_token)
 
