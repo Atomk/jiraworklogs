@@ -61,13 +61,6 @@ Jira docs:
 
 ## LLM Disclaimer
 
-Initial version generated with Copilot, see first commit.
-
-Prompt:
-> You are a Python developer, and your company requires you to report worked hours both on Jira and on Actitime, but to save time you want to only report times on one service and use a script to take that data and report it on the other service.
->
-> Produce a well-documented Python script that is responsible for gathering worked hours for the current week from Jira: you want to know, for each day, how many hours you worked on a specific work item and what category that ticket belongs to.
->
-> Then, get existing Actitime open tasks, and determine which Jira tasks (with reported time for this week) have no corresponding task on Actitime.
->
-> Then, via the Actitime API, take the gathered times and report them also on Actitime, assuming a task exists with the same code as the Jira ticket (i.e. Jira ticket "ET-432" should report time on Actitime for task "ET-432").
+This was initially meant to be a quick n' dirty automation script, I had no interest in investing much time into it so I used Copilot to generate the first version of this tool, which you can see in the first commit along with the prompt. No AI was used after that commit, and I deleted all of that code anyway in the following commits because:
+1) it did [not work](db472bacacc1470f39a1b99cb3e5083878bc26fe) and was crap enough that it made me not bother trying to refine the prompt
+2) while trying to fix the code I changed my mind about what I wanted the script to do - the initial idea was to sync times from Jira to Actitime, but then I found that Actitime makes it much easier for me to track hours, so I needed to sync in the opposite direction. I could not reuse most code anyway so in the end I deleted basically [everything](11a874d0fac8b7896505bdcd64dda00799fb9c38) except for the function `get_start_end_of_current_week`, which is the only AI-written code in the repository (to which I added the docstring and type hints though).
