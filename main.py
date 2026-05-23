@@ -11,6 +11,7 @@ This script:
 """
 from __future__ import annotations
 
+import argparse
 import datetime
 import json
 import re
@@ -33,6 +34,11 @@ class Config:
     actitime_basic_auth: str
     """API v1 supports only basic authentication."""
     actitime_ignore_tasks: list[str]
+
+@dataclass
+class CLIArgs:
+    sync: bool
+    sync_ignore_unmatched: bool
 
 
 # -------------------------------------------------------------------
@@ -153,7 +159,7 @@ def jira_add_worklogs_from_actitime(
 # ENTRY POINT
 # -------------------------------------------------------------------
 
-def main(config: Config):
+def main(config: Config, args: CLIArgs):
     user_id = actitime.get_user_id()
 
     monday, sunday = get_start_end_of_current_week()
@@ -230,9 +236,12 @@ def main(config: Config):
             print("- %s [%s] \"%s\"" % (actitask.id, actitask.jira_matcher, actitask.name))
         print()
 
-    if unmatched_actitime_tasks or unmatched_jira_tasks:
-        print("You must fix the unmatched tasks before you can send time data to Jira")
+    if not args.sync:
         return
+    if not args.sync_ignore_unmatched:
+        if unmatched_actitime_tasks or unmatched_jira_tasks:
+            print("You must fix the unmatched tasks before you can send time data to Jira")
+            return
 
     # TODO allow to ignore some Actitime tasks (e.g. "Chores")
 
@@ -257,4 +266,17 @@ if __name__ == "__main__":
     actitime.init(CONFIG.actitime_domain, CONFIG.actitime_basic_auth)
     jira.init(CONFIG.jira_domain, CONFIG.jira_email, CONFIG.jira_api_token)
 
-    main(CONFIG)
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '--sync',
+        action="store_true",
+        help="Whether to sync data, or view only.")
+    parser.add_argument(
+        '--sync-ignore-unmatched',
+        action="store_true",
+        help="Whether to sync data even if some Actitime tasks have no"
+        " correspondence in the current Jira sprints, and vice versa.")
+    parser.parse_args()
+    args = CLIArgs(**parser.parse_args().__dict__)
+
+    main(CONFIG, args)
