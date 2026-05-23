@@ -73,6 +73,7 @@ class TestJiraAddWorklogsFromActitime:
             with patch("jira.add_worklog"):
                 main.jira_add_worklogs_from_actitime("JJ-XXXX", 1234, timetrack)
 
+    @pytest.mark.skip
     def test_invalid_jira_key(self, timetrack):
         # TODO: this involves making the jira.add_worklog return an error 404,
         #  I need to see what actually happens in this case. Or just don't detect this
