@@ -159,7 +159,34 @@ def jira_add_worklogs_from_actitime(
 # ENTRY POINT
 # -------------------------------------------------------------------
 
+
 def main(config: Config, args: CLIArgs):
+    result = jira.get_tasks_current_sprint(worklogs=True)
+    tasks_no_worklogs = {}
+    for issue in result["issues"]:
+        key = issue["key"]
+        summary = issue["fields"]["summary"]
+        worklogs = issue["fields"]["worklog"]["worklogs"]
+        if not worklogs:
+            tasks_no_worklogs[key] = summary
+            continue
+        print(f"- [{key}] {summary}")
+        for worklog in worklogs:
+            # TODO Jira uses a +hhmm notation for timezone offset, while Python accepts
+            #   +hh:mm (adds colon), needs to be processed to convert it correctly. For now
+            #   a workaround is to just strip the timezone part
+            started_iso = worklog["started"].split("+")[0]
+            started_dt = datetime.datetime.fromisoformat(started_iso)
+            print(f"  - {worklog['timeSpent'].ljust(8)} ({started_dt})")
+
+    print()
+    if tasks_no_worklogs:
+        print("Tasks with no worklogs:")
+        for key, summary in tasks_no_worklogs.items():
+            print(f"- [{key}] {summary}")
+
+
+def main_old(config: Config, args: CLIArgs):
     user_id = actitime.get_user_id()
 
     monday, sunday = get_start_end_of_current_week()
