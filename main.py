@@ -41,6 +41,7 @@ class Config:
 class CLIArgs:
     sync: bool
     sync_ignore_unmatched: bool
+    view: str
 
 
 # -------------------------------------------------------------------
@@ -237,7 +238,7 @@ def jira_add_worklogs_from_actitime(
 # -------------------------------------------------------------------
 
 
-def main(config: Config, args: CLIArgs):
+def main_jira_view_worklogs():
     result = jira.get_tasks_current_sprint(worklogs=True)
     # FIXME dehardcode sprint start date
     date_start = datetime.date(2026, 5, 18)
@@ -245,7 +246,7 @@ def main(config: Config, args: CLIArgs):
     jira_print_timetrack(timetrack)
 
 
-def main_old(config: Config, args: CLIArgs):
+def main(config: Config, args: CLIArgs):
     user_id = actitime.get_user_id()
 
     monday, sunday = get_start_end_of_current_week()
@@ -362,7 +363,17 @@ if __name__ == "__main__":
         action="store_true",
         help="Whether to sync data even if some Actitime tasks have no"
         " correspondence in the current Jira sprints, and vice versa.")
+    # TODO this should not be allowed to be combined with the other two options.
+    #  I played a bit with subparsers but haven't settled on what I like more,
+    #  for now I'll just leave this option here.
+    parser.add_argument(
+        '--view',
+        choices=["jira"],
+        help="View logged hours.")
     parser.parse_args()
     args = CLIArgs(**parser.parse_args().__dict__)
 
-    main(CONFIG, args)
+    if args.view == "jira":
+        main_jira_view_worklogs()
+    else:
+        main(CONFIG, args)
