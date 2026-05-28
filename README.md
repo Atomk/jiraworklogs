@@ -39,6 +39,10 @@ You can set the token's expiration date to at most one year from now.
 python main.py
 ```
 
+View only Jira worklogs:
+```sh
+python main.py --view=jira
+```
 
 ## Test
 ```sh

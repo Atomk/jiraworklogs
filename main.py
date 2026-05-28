@@ -16,9 +16,11 @@ import datetime
 import json
 import re
 from dataclasses import dataclass
+from typing import TypedDict
 
 import actitime
 import jira
+import utils
 
 
 # -------------------------------------------------------------------
@@ -39,6 +41,7 @@ class Config:
 class CLIArgs:
     sync: bool
     sync_ignore_unmatched: bool
+    view: str
 
 
 # -------------------------------------------------------------------
@@ -97,6 +100,81 @@ def actitime_print_timetrack(data: actitime.ResponseTimetrack) -> None:
 # -------------------------------------------------------------------
 # JIRA FUNCTIONS
 # -------------------------------------------------------------------
+
+
+class JiraTimetrackRecord(TypedDict):
+    key: str
+    """Jira key of the tasks associated to this time record."""
+    time: int
+    """Seconds worked on the task."""
+
+class JiraTimetrack(TypedDict):
+    """Represents Jira worklogs grouped by day.
+    The structure is inspired by Actitime's timetrack format.
+    """
+    tasks: dict[str, str]
+    """Associates task ID with its title."""
+    data: dict[str, list[JiraTimetrackRecord]]
+    """Associates an ISO date to a list of time records."""
+
+
+def jira_tasks_to_timetrack(data: jira.ResponseSprint, date_start: datetime.date) -> JiraTimetrack:
+    """Get Jira tasks for the current sprint and organize worklogs data in a
+    dictionary that groups worked time by day.
+
+    `date_start`: only show worklogs starting from this date.
+    """
+    timetrack: JiraTimetrack = {
+        "tasks": {},
+        "data": {},
+    }
+    for issue in data["issues"]:
+        key = issue["key"]
+        summary = issue["fields"]["summary"]
+        timetrack["tasks"][key] = summary
+
+        for worklog in issue["fields"]["worklog"]["worklogs"]:
+            # TODO Jira uses a +hhmm notation for timezone offset, while Python accepts
+            #   +hh:mm (adds colon), needs to be processed to convert it correctly.
+            #   For now a workaround is to just strip the timezone part.
+            started_iso = worklog["started"].split("+")[0]
+            date_iso = worklog["started"].split("T")[0]
+            worklog_start = datetime.datetime.fromisoformat(started_iso)
+            if worklog_start.date() < date_start:
+                # skip worklogs outside of the requested range. Tasks that were created in older sprints
+                # may have worklogs created before the current sprint started.
+                continue
+            if date_iso not in timetrack["data"]:
+                timetrack["data"][date_iso] = []
+            timetrack["data"][date_iso].append({
+                "key": key,
+                "time": worklog['timeSpentSeconds'],
+            })
+    return timetrack
+
+
+# Inspired by actitime_print_timetrack
+def jira_print_timetrack(timetrack: JiraTimetrack) -> None:
+    weekday_name = ["lun", "mar", "mer", "gio", "ven", "sab", "dom"]
+    tasks = timetrack["tasks"]
+    ordered_dates = sorted(timetrack["data"].keys())
+    if not tasks or not ordered_dates:
+        print("no tasks or worklogs to print")
+        return
+    for date_iso in ordered_dates:
+        date = datetime.date.fromisoformat(date_iso)
+        weekday = weekday_name[date.weekday()]
+        print(f"{date.strftime('%d %b %Y')}, {weekday}")
+
+        total_minutes = 0
+        for record in timetrack["data"][date_iso]:
+            task_id = str(record["key"])
+            minutes = record["time"] // 60
+            print(f"- {utils.timefmt(minutes)} \t {tasks[task_id]}")
+            total_minutes += minutes
+        print(f"TOTAL: {utils.timefmt(total_minutes)}")
+        print()
+
 
 def jira_sprint_tasks_dictionary() -> dict[str, str]:
     """Returns a dict that maps Jira task keys to their summary (task title)."""
@@ -158,6 +236,15 @@ def jira_add_worklogs_from_actitime(
 # -------------------------------------------------------------------
 # ENTRY POINT
 # -------------------------------------------------------------------
+
+
+def main_jira_view_worklogs():
+    result = jira.get_tasks_current_sprint(worklogs=True)
+    # FIXME dehardcode sprint start date
+    date_start = datetime.date(2026, 5, 18)
+    timetrack = jira_tasks_to_timetrack(result, date_start)
+    jira_print_timetrack(timetrack)
+
 
 def main(config: Config, args: CLIArgs):
     user_id = actitime.get_user_id()
@@ -276,7 +363,17 @@ if __name__ == "__main__":
         action="store_true",
         help="Whether to sync data even if some Actitime tasks have no"
         " correspondence in the current Jira sprints, and vice versa.")
+    # TODO this should not be allowed to be combined with the other two options.
+    #  I played a bit with subparsers but haven't settled on what I like more,
+    #  for now I'll just leave this option here.
+    parser.add_argument(
+        '--view',
+        choices=["jira"],
+        help="View logged hours.")
     parser.parse_args()
     args = CLIArgs(**parser.parse_args().__dict__)
 
-    main(CONFIG, args)
+    if args.view == "jira":
+        main_jira_view_worklogs()
+    else:
+        main(CONFIG, args)
