@@ -1,0 +1,20 @@
+[project]
+name = "actitimejirasync"
+version = "0.1.0"
+readme = "README.md"
+requires-python = ">=3.9"
+
+dependencies = [
+    "requests < 3.0",
+]
+
+[project.optional_dependencies]
+test = [
+    "pytest == 8.4.2",  # last version that supports Python 3.9
+    "pytest-cov",
+]
+
+
+[tool.pytest.ini_options]
+pythonpath = ["src", "src/actitimejirasync"]
+testpaths = ["test"]

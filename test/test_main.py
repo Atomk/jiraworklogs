@@ -5,8 +5,7 @@ from unittest.mock import patch, call
 
 import pytest
 
-import actitime
-import main
+from actitimejirasync import actitime, main
 
 
 @pytest.fixture(autouse=True)

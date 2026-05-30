@@ -1,6 +1,6 @@
 import pytest
 
-import utils
+from actitimejirasync import utils
 
 
 def test_timefmt():
