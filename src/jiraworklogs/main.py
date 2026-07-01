@@ -20,11 +20,6 @@ class Config:
     jira_email: str
     jira_api_token: str
 
-@dataclass
-class CLIArgs:
-    sync: bool
-    sync_ignore_unmatched: bool
-    view: str
 
 
 # -------------------------------------------------------------------
@@ -135,16 +130,12 @@ def jira_sprint_tasks_dictionary() -> dict[str, str]:
 # -------------------------------------------------------------------
 
 
-def main_jira_view_worklogs():
+def main():
     result = jira.get_tasks_current_sprint(worklogs=True)
     # FIXME dehardcode sprint start date
     date_start = datetime.date(2026, 5, 18)
     timetrack = jira_tasks_to_timetrack(result, date_start)
     jira_print_timetrack(timetrack)
-
-
-def main(config: Config, args: CLIArgs):
-    pass
 
 
 if __name__ == "__main__":
@@ -153,15 +144,4 @@ if __name__ == "__main__":
 
     jira.init(CONFIG.jira_domain, CONFIG.jira_email, CONFIG.jira_api_token)
 
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        '--view',
-        choices=["jira"],
-        help="View logged hours.")
-    parser.parse_args()
-    args = CLIArgs(**parser.parse_args().__dict__)
-
-    if args.view == "jira":
-        main_jira_view_worklogs()
-    else:
-        main(CONFIG, args)
+    main()
