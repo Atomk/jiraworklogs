@@ -36,15 +36,19 @@ You can set the token's expiration date to at most one year from now.
 
 ## Run
 ```sh
+cd src/actitimejirasync
 python main.py
 ```
 
 View only Jira worklogs:
 ```sh
+cd src/actitimejirasync
 python main.py --view=jira
 ```
 
 ## Test
+
+From the project's root:
 ```sh
 pytest
 ```
