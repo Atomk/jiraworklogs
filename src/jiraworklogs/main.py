@@ -117,8 +117,7 @@ def jira_sprint_tasks_dictionary() -> dict[str, str]:
 
 def main():
     result = jira.get_tasks_current_sprint(worklogs=True)
-    # FIXME dehardcode sprint start date
-    date_start = datetime.date(2026, 5, 18)
+    date_start, _ = utils.get_start_end_of_current_week()
     timetrack = jira_tasks_to_timetrack(result, date_start)
     jira_print_timetrack(timetrack)
 
