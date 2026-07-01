@@ -21,21 +21,6 @@ class Config:
     jira_api_token: str
 
 
-
-# -------------------------------------------------------------------
-# HELPERS
-# -------------------------------------------------------------------
-
-def get_start_end_of_current_week() -> tuple[datetime.date, datetime.date]:
-    """
-    Return two `datetime.date` objects representing Monday and Sunday for the current week.
-    """
-    today = datetime.date.today()
-    start = today - datetime.timedelta(days=today.weekday())
-    end = start + datetime.timedelta(days=6)
-    return start, end
-
-
 # -------------------------------------------------------------------
 # JIRA FUNCTIONS
 # -------------------------------------------------------------------
