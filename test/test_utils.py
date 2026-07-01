@@ -1,6 +1,6 @@
 import pytest
 
-from actitimejirasync import utils
+from jiraworklogs import utils
 
 
 def test_timefmt():

@@ -1,5 +1,5 @@
 [project]
-name = "actitimejirasync"
+name = "jiraworklogs"
 version = "0.1.0"
 readme = "README.md"
 requires-python = ">=3.9"
@@ -16,5 +16,5 @@ test = [
 
 
 [tool.pytest.ini_options]
-pythonpath = ["src", "src/actitimejirasync"]
+pythonpath = ["src", "src/jiraworklogs"]
 testpaths = ["test"]

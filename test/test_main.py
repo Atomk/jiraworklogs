@@ -5,7 +5,7 @@ from unittest.mock import patch, call
 
 import pytest
 
-from actitimejirasync import actitime, main
+from jiraworklogs import actitime, main
 
 
 @pytest.fixture(autouse=True)
