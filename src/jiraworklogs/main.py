@@ -95,8 +95,9 @@ def jira_print_timetrack(timetrack: JiraTimetrack) -> None:
         total_minutes = 0
         for record in timetrack["data"][date_iso]:
             task_id = str(record["key"])
+            task_name = tasks[task_id]
             minutes = record["time"] // 60
-            print(f"- {utils.timefmt(minutes)} \t {tasks[task_id]}")
+            print(f"- {utils.timefmt(minutes)}".ljust(11) + task_id.ljust(10) + task_name)
             total_minutes += minutes
         print(f"TOTAL: {utils.timefmt(total_minutes)}")
         print()

@@ -5,18 +5,18 @@ A CLI script to visualize time spent on Jira tasks during the current week.
 ```
 $ python src/jiraworklogs/main.py
 29 Jun 2026
-- 1h 35m         Meetings
-- 1h             Task scheduler: active tasks still available after delete
-- 2h 30m         Debian migration
+- 1h 35m   JJ-1814   Meetings
+- 1h       JJ-496    Task scheduler: active tasks still available after delete
+- 2h 30m   JJ-1150   Debian migration
 TOTAL: 5h 5m
 
 30 Jun 2026
-- 8h             Task scheduler: simplify backend->frontend model conversion
+- 8h       JJ-783    Task scheduler: simplify backend->frontend model conversion
 TOTAL: 8h
 
 01 Jul 2026
-- 5h             Task scheduler: simplify backend->frontend model conversion
-- 2h 30m         Debian migration
+- 5h       JJ-783    Task scheduler: simplify backend->frontend model conversion
+- 2h 30m   JJ-1150   Debian migration
 TOTAL: 7h 30m
 ```
 
