@@ -81,8 +81,11 @@ def jira_print_timetrack(timetrack: JiraTimetrack) -> None:
     weekday_name = ["lun", "mar", "mer", "gio", "ven", "sab", "dom"]
     tasks = timetrack["tasks"]
     ordered_dates = sorted(timetrack["data"].keys())
-    if not tasks or not ordered_dates:
-        print("no tasks or worklogs to print")
+    if not tasks:
+        print("no tasks found")
+        return
+    if not ordered_dates:
+        print(f"found {len(tasks)} tasks, but none has worklogs")
         return
     for date_iso in ordered_dates:
         date = datetime.date.fromisoformat(date_iso)
