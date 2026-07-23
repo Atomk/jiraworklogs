@@ -78,7 +78,6 @@ def jira_tasks_to_timetrack(data: jira.ResponseSprint, date_start: datetime.date
 
 
 def jira_print_timetrack(timetrack: JiraTimetrack) -> None:
-    weekday_name = ["lun", "mar", "mer", "gio", "ven", "sab", "dom"]
     tasks = timetrack["tasks"]
     ordered_dates = sorted(timetrack["data"].keys())
     if not tasks:
@@ -89,8 +88,8 @@ def jira_print_timetrack(timetrack: JiraTimetrack) -> None:
         return
     for date_iso in ordered_dates:
         date = datetime.date.fromisoformat(date_iso)
-        weekday = weekday_name[date.weekday()]
-        print(f"{date.strftime('%d %b %Y')}, {weekday}")
+        # Print date formatted like: "22 Jul 2026, Wed"
+        print(date.strftime('%d %b %Y, %a'))
 
         total_minutes = 0
         for record in timetrack["data"][date_iso]:
