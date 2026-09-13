@@ -21,6 +21,19 @@ class Config:
     jira_api_token: str
 
 
+def load_config_or_exit() -> Config:
+    try:
+        with open("config.json", encoding="utf-8") as f:
+            return Config(**json.load(f))
+    except FileNotFoundError:
+        sys.exit("ERROR: missing `config.json`, see in the README how to set it up.")
+    except TypeError as e:
+        msg = str(e).removeprefix("Config.__init__()").strip()
+        sys.exit(f"ERROR: unexpected fields in `config.json`: {msg}")
+    except json.decoder.JSONDecodeError as e:
+        sys.exit(f"ERROR: malformed `config.json`: {e}")
+
+
 # -------------------------------------------------------------------
 # JIRA FUNCTIONS
 # -------------------------------------------------------------------
@@ -126,11 +139,7 @@ def main():
 
 
 if __name__ == "__main__":
-    try:
-        with open("config.json", encoding="utf-8") as f:
-            CONFIG = Config(**json.load(f))
-    except FileNotFoundError:
-        sys.exit("ERROR: missing `config.json`, see in the README how to set it up.")
+    CONFIG = load_config_or_exit()
 
     jira.init(CONFIG.jira_domain, CONFIG.jira_email, CONFIG.jira_api_token)
 
