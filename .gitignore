@@ -1,3 +1,9 @@
-.venv/
+# Python cache
 __pycache__/
+
+# Virtual environments
+.venv*/
+venv*/
+
+# Project-specific
 config.json
