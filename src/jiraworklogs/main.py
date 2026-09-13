@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import datetime
 import json
+import sys
 from dataclasses import dataclass
 from typing import TypedDict
 
@@ -125,8 +126,11 @@ def main():
 
 
 if __name__ == "__main__":
-    with open("config.json", encoding="utf-8") as f:
-        CONFIG = Config(**json.load(f))
+    try:
+        with open("config.json", encoding="utf-8") as f:
+            CONFIG = Config(**json.load(f))
+    except FileNotFoundError:
+        sys.exit("ERROR: missing `config.json`, see in the README how to set it up.")
 
     jira.init(CONFIG.jira_domain, CONFIG.jira_email, CONFIG.jira_api_token)
 
