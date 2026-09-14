@@ -31,6 +31,11 @@ This tool provides a day-by-day overview of worked time, so that I can easily se
 ## Setup
 Requires Python >= `3.9`.
 ```sh
+# Download repository
+git clone https://github.com/Atomk/jiraworklogs.git
+cd jiraworklogs
+
+# Setup virtual environment and dependencies
 python3 -m venv .venv
 source .venv/bin/activate
 pip install --upgrade pip
