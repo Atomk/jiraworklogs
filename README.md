@@ -53,7 +53,12 @@ You can set the token's expiration date to at most one year from now.
 
 ## Run
 ```sh
+# View times of tasks in current sprint, only current week
 python src/jiraworklogs/main.py
+
+# View times of tasks in current sprint, starting from a given day
+# This is useful when sprints last a few weeks
+python src/jiraworklogs/main.py --start 2026-09-06
 ```
 
 

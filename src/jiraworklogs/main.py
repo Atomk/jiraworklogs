@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import argparse
 import datetime
 import json
 import sys
@@ -131,16 +132,39 @@ def jira_sprint_tasks_dictionary() -> dict[str, str]:
 # -------------------------------------------------------------------
 
 
-def main():
+def parse_args() -> datetime.date:
+    parser = argparse.ArgumentParser(
+        prog="jiraworklogs",
+        description="View time spent each day on Jira tasks.",
+    )
+    parser.add_argument("--start", dest="date_start", type=str,
+            help="Only consider worklogs submitted on or after this date."
+                " If omitted, will use Monday of the current week."
+                " Format: YYYY-MM-DD")
+
+    args = parser.parse_args()
+
+    if args.date_start is None:
+        start, _ = utils.get_start_end_of_current_week()
+        return start
+    try:
+        return datetime.date.fromisoformat(args.date_start)
+    except Exception:
+        print("Error while parsing the start date")
+        raise
+
+
+def main(date_start: datetime.date):
     result = jira.get_tasks_current_sprint(worklogs=True)
-    date_start, _ = utils.get_start_end_of_current_week()
     timetrack = jira_tasks_to_timetrack(result, date_start)
     jira_print_timetrack(timetrack)
 
 
 if __name__ == "__main__":
+    date_start = parse_args()
+
     CONFIG = load_config_or_exit()
 
     jira.init(CONFIG.jira_domain, CONFIG.jira_email, CONFIG.jira_api_token)
 
-    main()
+    main(date_start)
