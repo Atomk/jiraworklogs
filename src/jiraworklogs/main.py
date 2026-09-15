@@ -171,17 +171,15 @@ def parse_args() -> tuple[datetime.date, bool]:
     return start, args.descriptions
 
 
-def main(date_start: datetime.date, show_descriptions: bool):
+def main() -> None:
+    date_start, show_descriptions = parse_args()
+    config = load_config_or_exit()
+    jira.init(config.jira_domain, config.jira_email, config.jira_api_token)
+
     result = jira.get_tasks_current_sprint(worklogs=True)
     timetrack = jira_tasks_to_timetrack(result, date_start)
     jira_print_timetrack(timetrack, show_descriptions)
 
 
 if __name__ == "__main__":
-    date_start, show_descriptions = parse_args()
-
-    CONFIG = load_config_or_exit()
-
-    jira.init(CONFIG.jira_domain, CONFIG.jira_email, CONFIG.jira_api_token)
-
-    main(date_start, show_descriptions)
+    main()
