@@ -45,6 +45,7 @@ class JiraTimetrackRecord(TypedDict):
     """Jira key of the tasks associated to this time record."""
     time: int
     """Seconds worked on the task."""
+    comment: str
 
 class JiraTimetrack(TypedDict):
     """Represents Jira worklogs grouped by day.
@@ -54,6 +55,16 @@ class JiraTimetrack(TypedDict):
     """Associates task ID with its title."""
     data: dict[str, list[JiraTimetrackRecord]]
     """Associates an ISO date to a list of time records."""
+
+
+def comment_from_worklog(worklog: dict) -> str:
+    comment = worklog["comment"]["content"]
+    if not comment:
+        return ""
+    try:
+        return worklog["comment"]["content"][0]["content"][0]["text"]
+    except Exception:
+        return ""
 
 
 def jira_tasks_to_timetrack(data: jira.ResponseSprint, date_start: datetime.date) -> JiraTimetrack:
@@ -87,11 +98,12 @@ def jira_tasks_to_timetrack(data: jira.ResponseSprint, date_start: datetime.date
             timetrack["data"][date_iso].append({
                 "key": key,
                 "time": worklog['timeSpentSeconds'],
+                "comment": comment_from_worklog(worklog),
             })
     return timetrack
 
 
-def jira_print_timetrack(timetrack: JiraTimetrack) -> None:
+def jira_print_timetrack(timetrack: JiraTimetrack, show_descriptions: bool) -> None:
     tasks = timetrack["tasks"]
     ordered_dates = sorted(timetrack["data"].keys())
     if not tasks:
@@ -111,6 +123,8 @@ def jira_print_timetrack(timetrack: JiraTimetrack) -> None:
             task_name = tasks[task_id]
             minutes = record["time"] // 60
             print(f"- {utils.timefmt(minutes)}".ljust(11) + task_id.ljust(10) + task_name)
+            if show_descriptions and record["comment"]:
+                print(f'           {record["comment"]}')
             total_minutes += minutes
         print(f"TOTAL: {utils.timefmt(total_minutes)}")
         print()
@@ -132,7 +146,7 @@ def jira_sprint_tasks_dictionary() -> dict[str, str]:
 # -------------------------------------------------------------------
 
 
-def parse_args() -> datetime.date:
+def parse_args() -> tuple[datetime.date, bool]:
     parser = argparse.ArgumentParser(
         prog="jiraworklogs",
         description="View time spent each day on Jira tasks.",
@@ -141,30 +155,33 @@ def parse_args() -> datetime.date:
             help="Only consider worklogs submitted on or after this date."
                 " If omitted, will use Monday of the current week."
                 " Format: YYYY-MM-DD")
-
+    parser.add_argument("--descriptions", dest="descriptions", action="store_true",
+        help="Under each worklog show its description, if available.")
     args = parser.parse_args()
 
     if args.date_start is None:
         start, _ = utils.get_start_end_of_current_week()
-        return start
-    try:
-        return datetime.date.fromisoformat(args.date_start)
-    except Exception:
-        print("Error while parsing the start date")
-        raise
+    else:
+        try:
+            start = datetime.date.fromisoformat(args.date_start)
+        except Exception:
+            print("Error while parsing the start date")
+            raise
+
+    return start, args.descriptions
 
 
-def main(date_start: datetime.date):
+def main(date_start: datetime.date, show_descriptions: bool):
     result = jira.get_tasks_current_sprint(worklogs=True)
     timetrack = jira_tasks_to_timetrack(result, date_start)
-    jira_print_timetrack(timetrack)
+    jira_print_timetrack(timetrack, show_descriptions)
 
 
 if __name__ == "__main__":
-    date_start = parse_args()
+    date_start, show_descriptions = parse_args()
 
     CONFIG = load_config_or_exit()
 
     jira.init(CONFIG.jira_domain, CONFIG.jira_email, CONFIG.jira_api_token)
 
-    main(date_start)
+    main(date_start, show_descriptions)
