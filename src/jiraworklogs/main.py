@@ -9,7 +9,7 @@ from typing import TypedDict
 
 import jira
 import utils
-
+from utils import Colors
 
 # -------------------------------------------------------------------
 # CONFIGURATION
@@ -115,7 +115,7 @@ def jira_print_timetrack(timetrack: JiraTimetrack, show_descriptions: bool) -> N
     for date_iso in ordered_dates:
         date = datetime.date.fromisoformat(date_iso)
         # Print date formatted like: "22 Jul 2026, Wed"
-        print(date.strftime('%d %b %Y, %a'))
+        print(f"{Colors.PURPLE}{date.strftime('%d %b %Y, %a')}{Colors.ENDC}")
 
         total_minutes = 0
         for record in timetrack["data"][date_iso]:
@@ -124,7 +124,7 @@ def jira_print_timetrack(timetrack: JiraTimetrack, show_descriptions: bool) -> N
             minutes = record["time"] // 60
             print(f"- {utils.timefmt(minutes)}".ljust(11) + task_id.ljust(10) + task_name)
             if show_descriptions and record["comment"]:
-                print(f'           {record["comment"]}')
+                print(f'           {Colors.GRAY}{record["comment"]}{Colors.ENDC}')
             total_minutes += minutes
         print(f"TOTAL: {utils.timefmt(total_minutes)}")
         print()
