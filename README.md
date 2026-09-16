@@ -28,7 +28,33 @@ I need to track worked time in Jira, but sometimes I forget to record something 
 This tool provides a day-by-day overview of worked time, so that I can easily see if I forgot to add hours somewhere.
 
 
-## Setup
+## Install
+You first need to install [pipx](https://pipx.pypa.io/stable/how-to/install-pipx.html), then:
+
+```sh
+# Install the `jiraworklogs` command globally in an isolated environment
+pipx install git+https://github.com/Atomk/jiraworklogs.git
+
+# If you change your mind
+pipx uninstall jiraworklogs
+```
+
+
+## Usage
+```sh
+# View times of tasks in current sprint, only current week
+jiraworklogs
+
+# View times of tasks in current sprint, starting from a given day
+# This is useful when sprints last a few weeks
+jiraworklogs --start 2026-09-06
+
+# List of all available options
+jiraworklogs --help
+```
+
+
+## Setup for development
 Requires Python >= `3.9`.
 ```sh
 # Download repository
@@ -40,6 +66,9 @@ python3 -m venv .venv
 source .venv/bin/activate
 pip install --upgrade pip
 pip install -r requirements.lock
+
+# Run the program
+python src/jiraworklogs/main.py --help
 ```
 
 
@@ -54,17 +83,6 @@ Go to https://id.atlassian.com/manage-profile/security to create an API token. U
 You can name the token whatever you want, I use "jiraworklogs_cli".
 
 You can set the token's expiration date to at most one year from now.
-
-
-## Run
-```sh
-# View times of tasks in current sprint, only current week
-python src/jiraworklogs/main.py
-
-# View times of tasks in current sprint, starting from a given day
-# This is useful when sprints last a few weeks
-python src/jiraworklogs/main.py --start 2026-09-06
-```
 
 
 ## Test

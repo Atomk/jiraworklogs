@@ -5,5 +5,9 @@ __pycache__/
 .venv*/
 venv*/
 
+# Build
+build/
+*.egg-info/
+
 # Project-specific
 config.json

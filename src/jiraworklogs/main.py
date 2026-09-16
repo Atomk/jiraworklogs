@@ -7,9 +7,8 @@ import sys
 from dataclasses import dataclass
 from typing import TypedDict
 
-import jira
-import utils
-from utils import Colors
+from . import jira, utils
+from .utils import Colors
 
 # -------------------------------------------------------------------
 # CONFIGURATION

@@ -18,6 +18,11 @@ test = [
 ]
 
 
+[project.scripts]
+# Function that should be run when using the `jiraworklogs` command via CLI
+jiraworklogs = "jiraworklogs.main:main"
+
+
 [tool.pytest.ini_options]
 pythonpath = ["src", "src/jiraworklogs"]
 testpaths = ["test"]
