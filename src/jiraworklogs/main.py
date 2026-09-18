@@ -21,6 +21,14 @@ class Config:
     jira_email: str
     jira_api_token: str
 
+    def shares_any_value_with(self, other: Config) -> bool:
+        """Return whether two config files have any field value in common."""
+        return (
+            self.jira_domain == other.jira_domain or
+            self.jira_email == other.jira_email or
+            self.jira_api_token == other.jira_api_token
+        )
+
     @staticmethod
     def from_file(path: str) -> Config:
         """Generate a Config instance based on the JSON at the given path."""
@@ -58,9 +66,20 @@ def load_config_or_exit() -> Config:
 
     # Config file exists, try to load it
     try:
-        return Config.from_file(config_path)
+        config = Config.from_file(config_path)
     except Exception as err:
         sys.exit(str(err))
+
+    # Config loaded successfully, ask user to edit it if some values were left
+    # to their default
+    if Config(**sample_config).shares_any_value_with(config):
+        print("It looks like you did not fully set up the configuration yet.")
+        answer = input("Open the configuration file? [Y/n] ")
+        if not answer or answer.strip().lower() == "y":
+            utils.open_file_with_text_editor(config_path)
+        sys.exit()
+    else:
+        return config
 
 
 # -------------------------------------------------------------------

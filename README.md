@@ -73,11 +73,11 @@ python src/jiraworklogs/main.py --help
 
 
 ## Configure
-1. Rename `config.sample.json` to `config.json`
+1. Run `jiraworklogs` and let it open the config file
 2. Replace the auth values with you own
 
 
-### Jira
+### How to get a Jira API token
 Go to https://id.atlassian.com/manage-profile/security to create an API token. Use "Create API token", not the scoped one - while that is more secure, it does not work with two-factor authentication and it's more annoying to setup since you have to create an app in Atlassian's Developer Console.
 
 You can name the token whatever you want, I use "jiraworklogs_cli".

@@ -1,4 +1,8 @@
+import shutil
 import datetime
+import os
+import subprocess
+import sys
 
 
 class Colors:
@@ -43,3 +47,23 @@ def timefmt(minutes: int) -> str:
         return f"{hours}h"
     else:
         return f"{hours}h {mins}m"
+
+
+def open_file_with_text_editor(path: str) -> None:
+    if sys.platform == "linux":
+        exit_code = None
+        for command in ("xdg-open", "nano"):
+            if shutil.which(command):
+                exit_code = subprocess.call(["nano", path])
+                if exit_code != 0:
+                    raise Exception(f"subprocess exited with code {exit_code}.")
+        if exit_code is None:
+            raise Exception(f"could not find any available editor")
+    elif os.name == "nt":
+        # Emulate double-clicking on the file. Note that unlike subprocesses,
+        # this immediately returns, without waiting for the application to close.
+        os.startfile(path)
+    elif sys.platform == "darwin":
+        subprocess.call(["open", path])
+    else:
+        raise Exception(f"unsupported platform: {sys.platform}")
