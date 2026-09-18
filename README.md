@@ -1,9 +1,9 @@
 # jiraworklogs
 
-A CLI script to visualize time spent on Jira tasks during the current week.
+A simple CLI tool to view time spent each day on Jira tasks.
 
 ```
-$ python src/jiraworklogs/main.py
+$ jiraworklogs
 29 Jun 2026
 - 1h 35m   JJ-1814   Meetings
 - 1h       JJ-496    Task scheduler: active tasks still available after delete
@@ -49,7 +49,7 @@ jiraworklogs
 # This is useful when sprints last a few weeks
 jiraworklogs --start 2026-09-06
 
-# List of all available options
+# Show all available options
 jiraworklogs --help
 ```
 
@@ -61,14 +61,15 @@ Requires Python >= `3.9`.
 git clone https://github.com/Atomk/jiraworklogs.git
 cd jiraworklogs
 
-# Setup virtual environment and dependencies
+# Setup a virtual environment
 python3 -m venv .venv
 source .venv/bin/activate
-pip install --upgrade pip
-pip install -r requirements.lock
+
+# Install the `jiraworklogs` package locally with its dependencies
+pip install -e .
 
 # Run the program
-python src/jiraworklogs/main.py --help
+python -m jiraworklogs.main
 ```
 
 
@@ -87,6 +88,16 @@ You can set the token's expiration date to at most one year from now.
 
 ## Test
 ```sh
+# Activate venv
+cd jiraworklogs
+source .venv/bin/activate
+
+# Setup test dependencies
+# On older Python versions you might also need to run this:
+# pip install --upgrade pip
+pip install --group test
+
+# Run tests
 pytest
 ```
 
