@@ -21,6 +21,20 @@ class Config:
     jira_email: str
     jira_api_token: str
 
+    @staticmethod
+    def from_file(path: str) -> Config:
+        """Generate a Config instance based on the JSON at the given path."""
+        try:
+            with open(path, encoding="utf-8") as f:
+                return Config(**json.load(f))
+        except FileNotFoundError:
+            raise Exception(f"ERROR: config file not found at {path}")
+        except TypeError as e:
+            msg = str(e).removeprefix("Config.__init__()").strip()
+            raise Exception(f"ERROR: unexpected fields in config file: {msg}")
+        except json.decoder.JSONDecodeError as e:
+            raise Exception(f"ERROR: malformed config file: {e}")
+
 
 def load_config_or_exit() -> Config:
     sample_config = {
@@ -44,15 +58,9 @@ def load_config_or_exit() -> Config:
 
     # Config file exists, try to load it
     try:
-        with open(config_path, encoding="utf-8") as f:
-            return Config(**json.load(f))
-    except FileNotFoundError:
-        sys.exit("ERROR: missing `config.json`, see in the README how to set it up.")
-    except TypeError as e:
-        msg = str(e).removeprefix("Config.__init__()").strip()
-        sys.exit(f"ERROR: unexpected fields in `config.json`: {msg}")
-    except json.decoder.JSONDecodeError as e:
-        sys.exit(f"ERROR: malformed `config.json`: {e}")
+        return Config.from_file(config_path)
+    except Exception as err:
+        sys.exit(str(err))
 
 
 # -------------------------------------------------------------------
