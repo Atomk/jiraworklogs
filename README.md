@@ -1,9 +1,9 @@
 # jiraworklogs
 
-A CLI script to visualize time spent on Jira tasks during the current week.
+A CLI tool script to view time spent each day on Jira tasks.
 
 ```
-$ python src/jiraworklogs/main.py
+$ jiraworklogs
 29 Jun 2026
 - 1h 35m   JJ-1814   Meetings
 - 1h       JJ-496    Task scheduler: active tasks still available after delete
@@ -49,7 +49,7 @@ jiraworklogs
 # This is useful when sprints last a few weeks
 jiraworklogs --start 2026-09-06
 
-# List of all available options
+# Show all available options
 jiraworklogs --help
 ```
 
@@ -61,14 +61,20 @@ Requires Python >= `3.9`.
 git clone https://github.com/Atomk/jiraworklogs.git
 cd jiraworklogs
 
-# Setup virtual environment and dependencies
+# Install the "jiraworklogs" tool from the current directory
+pipx install .
+# Use this to update the tool after you make a change
+pipx reinstall jiraworklogs
+```
+
+If you want to run tests, you also need to setup a virtual environment and dependencies:
+```sh
 python3 -m venv .venv
 source .venv/bin/activate
 pip install --upgrade pip
 pip install -r requirements.lock
-
-# Run the program
-python src/jiraworklogs/main.py --help
+pip install --group test
+pytest
 ```
 
 
@@ -83,12 +89,6 @@ Go to https://id.atlassian.com/manage-profile/security to create an API token. U
 You can name the token whatever you want, I use "jiraworklogs_cli".
 
 You can set the token's expiration date to at most one year from now.
-
-
-## Test
-```sh
-pytest
-```
 
 
 ## Reference
