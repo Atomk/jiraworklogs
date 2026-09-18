@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import datetime
 import json
+import os
 import sys
 from dataclasses import dataclass
 from typing import TypedDict
@@ -22,8 +23,28 @@ class Config:
 
 
 def load_config_or_exit() -> Config:
+    sample_config = {
+        "jira_domain": "https://yourcompany.atlassian.net",
+        "jira_email": "your.email@company.com",
+        "jira_api_token": "your_jira_api_token",
+    }
+    # TODO perhaps the config should be saved in another location so that it persists across reinstalls
+    # TODO perhaps the file contents should be encoded in base64 so it's harder to find secrets via grep
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    config_path = os.path.join(current_dir, "config.json")
+
+    # If config file does not exist, try to create it
+    if not os.path.isfile(config_path):
+        try:
+            with open(config_path, "w", encoding="utf-8") as f:
+                json.dump(sample_config, f, indent=4)
+            print("config file written at:", config_path)
+        except Exception as e:
+            sys.exit(f"cannot write config file: {e}")
+
+    # Config file exists, try to load it
     try:
-        with open("config.json", encoding="utf-8") as f:
+        with open(config_path, encoding="utf-8") as f:
             return Config(**json.load(f))
     except FileNotFoundError:
         sys.exit("ERROR: missing `config.json`, see in the README how to set it up.")

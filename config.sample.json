@@ -1,5 +1,0 @@
-{
-    "jira_domain": "https://yourcompany.atlassian.net",
-    "jira_email": "your.email@company.com",
-    "jira_api_token": "your_jira_api_token"
-}
