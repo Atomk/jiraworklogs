@@ -1,0 +1,114 @@
+{
+    "tasks": {
+        "JJ-2066": "Planner: invalidate tasks with start time == end time",
+        "JJ-2058": "api: evaluate enabling compression of huge payloads",
+        "JJ-2054": "api: load only actually used templates",
+        "JJ-2038": "Debug KC service disconnections",
+        "JJ-2029": "Meetings",
+        "JJ-2022": "JRC and Planner, remove workaround to load config doc locally",
+        "JJ-2004": "QA-469-[Planner] - Button not present",
+        "JJ-1985": "Planner: update configuration in production",
+        "JJ-1977": "QA-464-[Planner] - Task Lock not present",
+        "JJ-1760": "Jilock: verify that the test environment works",
+        "JJ-1486": "Training - Course 2",
+        "JJ-1263": "Settings - Write missing unit tests",
+        "JJ-1259": "Planner - Use closest year possible in periodic iCal"
+    },
+    "data": {
+        "2026-09-17": [
+            {
+                "key": "JJ-2066",
+                "time": 5400,
+                "comment": "Debugging the issue, adding validation, checking if other prod tasks have this issue"
+            },
+            {
+                "key": "JJ-1985",
+                "time": 3600,
+                "comment": "Check all production dbs to find if this change would break existing tasks"
+            },
+            {
+                "key": "JJ-1263",
+                "time": 18000,
+                "comment": "Review/polish tests and commit"
+            }
+        ],
+        "2026-09-18": [
+            {
+                "key": "JJ-2066",
+                "time": 9000,
+                "comment": ""
+            },
+            {
+                "key": "JJ-2029",
+                "time": 3900,
+                "comment": "Commissioning meeting 2, clarify last stuff with Loren"
+            },
+            {
+                "key": "JJ-1985",
+                "time": 900,
+                "comment": "Update config with A. and ensure it works"
+            },
+            {
+                "key": "JJ-1486",
+                "time": 3600,
+                "comment": "lecture 1 + notes"
+            },
+            {
+                "key": "JJ-1259",
+                "time": 7200,
+                "comment": "Continue implementation and try to fix tests by patching system date"
+            }
+        ],
+        "2026-09-14": [
+            {
+                "key": "JJ-2058",
+                "time": 14400,
+                "comment": "Benchmarks and tests with Arturo + documentation"
+            },
+            {
+                "key": "JJ-2029",
+                "time": 1800,
+                "comment": "Quick sprint meeting"
+            },
+            {
+                "key": "JJ-2029",
+                "time": 1800,
+                "comment": "Meeting for\u2026something related to user log"
+            },
+            {
+                "key": "JJ-2029",
+                "time": 2700,
+                "comment": "Meeting for user log updates by Dino"
+            },
+            {
+                "key": "JJ-2029",
+                "time": 4800,
+                "comment": "commissioning improvements meeting"
+            },
+            {
+                "key": "JJ-2004",
+                "time": 2400,
+                "comment": "Discussion with D. about handling via configuration"
+            }
+        ],
+        "2026-09-15": [
+            {
+                "key": "JJ-2058",
+                "time": 5400,
+                "comment": "More thorough test and discuss with Arturo"
+            },
+            {
+                "key": "JJ-2054",
+                "time": 10800,
+                "comment": "Tried to speedup the main JRC call but it\u2019s a bit more delicate than I thought"
+            }
+        ],
+        "2026-09-16": [
+            {
+                "key": "JJ-1263",
+                "time": 21600,
+                "comment": "Thoroughly test the POST endpoint which was completely missing tests"
+            }
+        ]
+    }
+}

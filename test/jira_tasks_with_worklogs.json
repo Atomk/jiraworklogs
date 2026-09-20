@@ -1,0 +1,2092 @@
+{
+    "issues": [
+        {
+            "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+            "id": "63678",
+            "self": "https://mycompany.atlassian.net/rest/api/3/issue/63678",
+            "key": "JJ-2066",
+            "fields": {
+                "summary": "Planner: invalidate tasks with start time == end time",
+                "worklog": {
+                    "startAt": 0,
+                    "maxResults": 20,
+                    "total": 2,
+                    "worklogs": [
+                        {
+                            "self": "https://mycompany.atlassian.net/rest/api/3/issue/63678/worklog/54745",
+                            "author": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "updateAuthor": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "comment": {
+                                "type": "doc",
+                                "version": 1,
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Debugging the issue, adding validation, checking if other prod tasks have this issue"
+                                            }
+                                        ],
+                                        "attrs": {
+                                            "localId": "93e9ca0e9ae2"
+                                        }
+                                    }
+                                ]
+                            },
+                            "created": "2026-09-17T17:55:51.050+0200",
+                            "updated": "2026-09-17T17:55:51.050+0200",
+                            "started": "2026-09-17T16:25:19.683+0200",
+                            "timeSpent": "1h 30m",
+                            "timeSpentSeconds": 5400,
+                            "id": "54745",
+                            "issueId": "63678"
+                        },
+                        {
+                            "self": "https://mycompany.atlassian.net/rest/api/3/issue/63678/worklog/54880",
+                            "author": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "updateAuthor": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "comment": {
+                                "type": "doc",
+                                "version": 1,
+                                "content": [
+                                    {
+                                        "type": "bulletList",
+                                        "content": [
+                                            {
+                                                "type": "listItem",
+                                                "attrs": {
+                                                    "localId": "82b480d8ff46"
+                                                },
+                                                "content": [
+                                                    {
+                                                        "type": "paragraph",
+                                                        "content": [
+                                                            {
+                                                                "type": "text",
+                                                                "text": "Find a repro for the linked issue (took some time)"
+                                                            }
+                                                        ],
+                                                        "attrs": {
+                                                            "localId": "67dff5348bd4"
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "listItem",
+                                                "attrs": {
+                                                    "localId": "18d4475e3301"
+                                                },
+                                                "content": [
+                                                    {
+                                                        "type": "paragraph",
+                                                        "content": [
+                                                            {
+                                                                "type": "text",
+                                                                "text": "Add validation in test env and verify"
+                                                            }
+                                                        ],
+                                                        "attrs": {
+                                                            "localId": "1da2594dcb73"
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "listItem",
+                                                "attrs": {
+                                                    "localId": "f174544fd64e"
+                                                },
+                                                "content": [
+                                                    {
+                                                        "type": "paragraph",
+                                                        "content": [
+                                                            {
+                                                                "type": "text",
+                                                                "text": "Discussion with D., to see if I have to add other validations for changes he\u2019s working on"
+                                                            }
+                                                        ],
+                                                        "attrs": {
+                                                            "localId": "a8513c3029d9"
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "attrs": {
+                                            "localId": "0052871937be"
+                                        }
+                                    }
+                                ]
+                            },
+                            "created": "2026-09-18T12:03:36.867+0200",
+                            "updated": "2026-09-18T12:03:36.867+0200",
+                            "started": "2026-09-18T09:31:45.526+0200",
+                            "timeSpent": "2h 30m",
+                            "timeSpentSeconds": 9000,
+                            "id": "54880",
+                            "issueId": "63678"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+            "id": "62774",
+            "self": "https://mycompany.atlassian.net/rest/api/3/issue/62774",
+            "key": "JJ-2058",
+            "fields": {
+                "summary": "api: evaluate enabling compression of huge payloads",
+                "worklog": {
+                    "startAt": 0,
+                    "maxResults": 20,
+                    "total": 2,
+                    "worklogs": [
+                        {
+                            "self": "https://mycompany.atlassian.net/rest/api/3/issue/62774/worklog/53667",
+                            "author": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "updateAuthor": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "comment": {
+                                "type": "doc",
+                                "version": 1,
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Benchmarks and tests with Arturo + documentation"
+                                            }
+                                        ],
+                                        "attrs": {
+                                            "localId": "ccecff1a385e"
+                                        }
+                                    }
+                                ]
+                            },
+                            "created": "2026-09-14T18:03:36.374+0200",
+                            "updated": "2026-09-14T18:03:36.374+0200",
+                            "started": "2026-09-14T13:30:00.000+0200",
+                            "timeSpent": "4h",
+                            "timeSpentSeconds": 14400,
+                            "id": "53667",
+                            "issueId": "62774"
+                        },
+                        {
+                            "self": "https://mycompany.atlassian.net/rest/api/3/issue/62774/worklog/53777",
+                            "author": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "updateAuthor": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "comment": {
+                                "type": "doc",
+                                "version": 1,
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "More thorough test and discuss with Arturo"
+                                            }
+                                        ],
+                                        "attrs": {
+                                            "localId": "babf558446c5"
+                                        }
+                                    }
+                                ]
+                            },
+                            "created": "2026-09-15T10:38:33.207+0200",
+                            "updated": "2026-09-15T10:38:33.207+0200",
+                            "started": "2026-09-15T09:00:00.000+0200",
+                            "timeSpent": "1h 30m",
+                            "timeSpentSeconds": 5400,
+                            "id": "53777",
+                            "issueId": "62774"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+            "id": "62389",
+            "self": "https://mycompany.atlassian.net/rest/api/3/issue/62389",
+            "key": "JJ-2054",
+            "fields": {
+                "summary": "api: load only actually used templates",
+                "worklog": {
+                    "startAt": 0,
+                    "maxResults": 20,
+                    "total": 4,
+                    "worklogs": [
+                        {
+                            "self": "https://mycompany.atlassian.net/rest/api/3/issue/62389/worklog/53097",
+                            "author": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "updateAuthor": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "comment": {
+                                "type": "doc",
+                                "version": 1,
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Debug the api error that caused this to be found "
+                                            }
+                                        ],
+                                        "attrs": {
+                                            "localId": "358f9097a41a"
+                                        }
+                                    }
+                                ]
+                            },
+                            "created": "2026-09-11T10:02:18.337+0200",
+                            "updated": "2026-09-11T14:40:58.478+0200",
+                            "started": "2026-09-10T17:00:00.000+0200",
+                            "timeSpent": "30m",
+                            "timeSpentSeconds": 1800,
+                            "id": "53097",
+                            "issueId": "62389"
+                        },
+                        {
+                            "self": "https://mycompany.atlassian.net/rest/api/3/issue/62389/worklog/53096",
+                            "author": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "updateAuthor": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "comment": {
+                                "type": "doc",
+                                "version": 1,
+                                "content": []
+                            },
+                            "created": "2026-09-11T10:01:55.401+0200",
+                            "updated": "2026-09-11T10:01:55.401+0200",
+                            "started": "2026-09-11T09:01:48.828+0200",
+                            "timeSpent": "1h",
+                            "timeSpentSeconds": 3600,
+                            "id": "53096",
+                            "issueId": "62389"
+                        },
+                        {
+                            "self": "https://mycompany.atlassian.net/rest/api/3/issue/62389/worklog/53198",
+                            "author": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "updateAuthor": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "comment": {
+                                "type": "doc",
+                                "version": 1,
+                                "content": [
+                                    {
+                                        "type": "bulletList",
+                                        "content": [
+                                            {
+                                                "type": "listItem",
+                                                "attrs": {
+                                                    "localId": "d155c7b37e67"
+                                                },
+                                                "content": [
+                                                    {
+                                                        "type": "paragraph",
+                                                        "content": [
+                                                            {
+                                                                "type": "text",
+                                                                "text": "wrote notes about the issue in jjlib and other relevant places"
+                                                            }
+                                                        ],
+                                                        "attrs": {
+                                                            "localId": "4a65bc4f763c"
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "listItem",
+                                                "attrs": {
+                                                    "localId": "5b0d0a06ffaa"
+                                                },
+                                                "content": [
+                                                    {
+                                                        "type": "paragraph",
+                                                        "content": [
+                                                            {
+                                                                "type": "text",
+                                                                "text": "implemented a generic memoizer to solve the issue in every place in the same way. I might add it to the jjlib until we fix this properly"
+                                                            }
+                                                        ],
+                                                        "attrs": {
+                                                            "localId": "4a2256284a18"
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "attrs": {
+                                            "localId": "91882cf52c62"
+                                        }
+                                    }
+                                ]
+                            },
+                            "created": "2026-09-11T14:02:46.665+0200",
+                            "updated": "2026-09-11T16:16:57.398+0200",
+                            "started": "2026-09-11T13:32:42.718+0200",
+                            "timeSpent": "1h 30m",
+                            "timeSpentSeconds": 5400,
+                            "id": "53198",
+                            "issueId": "62389"
+                        },
+                        {
+                            "self": "https://mycompany.atlassian.net/rest/api/3/issue/62389/worklog/53889",
+                            "author": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "updateAuthor": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "comment": {
+                                "type": "doc",
+                                "version": 1,
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Tried to speedup the main JRC call but it\u2019s a bit more delicate than I thought"
+                                            }
+                                        ],
+                                        "attrs": {
+                                            "localId": "367f1d8a2753"
+                                        }
+                                    }
+                                ]
+                            },
+                            "created": "2026-09-15T17:43:21.937+0200",
+                            "updated": "2026-09-15T17:43:36.112+0200",
+                            "started": "2026-09-15T15:42:17.601+0200",
+                            "timeSpent": "3h",
+                            "timeSpentSeconds": 10800,
+                            "id": "53889",
+                            "issueId": "62389"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+            "id": "61438",
+            "self": "https://mycompany.atlassian.net/rest/api/3/issue/61438",
+            "key": "JJ-2038",
+            "fields": {
+                "summary": "Debug KC service disconnections",
+                "worklog": {
+                    "startAt": 0,
+                    "maxResults": 20,
+                    "total": 3,
+                    "worklogs": [
+                        {
+                            "self": "https://mycompany.atlassian.net/rest/api/3/issue/61438/worklog/52479",
+                            "author": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "updateAuthor": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "comment": {
+                                "type": "doc",
+                                "version": 1,
+                                "content": [
+                                    {
+                                        "type": "bulletList",
+                                        "content": [
+                                            {
+                                                "type": "listItem",
+                                                "attrs": {
+                                                    "localId": "dbed49d3de3a"
+                                                },
+                                                "content": [
+                                                    {
+                                                        "type": "paragraph",
+                                                        "content": [
+                                                            {
+                                                                "type": "text",
+                                                                "text": "Setup dev env (took a while, ancient python)"
+                                                            }
+                                                        ],
+                                                        "attrs": {
+                                                            "localId": "8c5479a54306"
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "listItem",
+                                                "attrs": {
+                                                    "localId": "74a0f7c78994"
+                                                },
+                                                "content": [
+                                                    {
+                                                        "type": "paragraph",
+                                                        "content": [
+                                                            {
+                                                                "type": "text",
+                                                                "text": "Try to understand how things are organized"
+                                                            }
+                                                        ],
+                                                        "attrs": {
+                                                            "localId": "ff7baa4fef21"
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "listItem",
+                                                "attrs": {
+                                                    "localId": "14077c8eb888"
+                                                },
+                                                "content": [
+                                                    {
+                                                        "type": "paragraph",
+                                                        "content": [
+                                                            {
+                                                                "type": "text",
+                                                                "text": "Start fixing linter errors/warnings, this helped discover some missing logs"
+                                                            }
+                                                        ],
+                                                        "attrs": {
+                                                            "localId": "758f32e87f59"
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "attrs": {
+                                            "localId": "562f20c32dde"
+                                        }
+                                    }
+                                ]
+                            },
+                            "created": "2026-09-09T17:55:39.788+0200",
+                            "updated": "2026-09-09T17:55:39.788+0200",
+                            "started": "2026-09-09T11:30:00.000+0200",
+                            "timeSpent": "5h",
+                            "timeSpentSeconds": 18000,
+                            "id": "52479",
+                            "issueId": "61438"
+                        },
+                        {
+                            "self": "https://mycompany.atlassian.net/rest/api/3/issue/61438/worklog/53197",
+                            "author": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "updateAuthor": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "comment": {
+                                "type": "doc",
+                                "version": 1,
+                                "content": []
+                            },
+                            "created": "2026-09-11T13:57:05.446+0200",
+                            "updated": "2026-09-11T13:57:05.446+0200",
+                            "started": "2026-09-10T13:30:00.000+0200",
+                            "timeSpent": "5h",
+                            "timeSpentSeconds": 18000,
+                            "id": "53197",
+                            "issueId": "61438"
+                        },
+                        {
+                            "self": "https://mycompany.atlassian.net/rest/api/3/issue/61438/worklog/53164",
+                            "author": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "updateAuthor": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "comment": {
+                                "type": "doc",
+                                "version": 1,
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Implement decorator to catch any exception in message handler callbacks"
+                                            }
+                                        ],
+                                        "attrs": {
+                                            "localId": "b8ff921f47a1"
+                                        }
+                                    }
+                                ]
+                            },
+                            "created": "2026-09-11T13:34:11.897+0200",
+                            "updated": "2026-09-11T13:34:11.897+0200",
+                            "started": "2026-09-11T09:33:40.991+0200",
+                            "timeSpent": "4h",
+                            "timeSpentSeconds": 14400,
+                            "id": "53164",
+                            "issueId": "61438"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+            "id": "61363",
+            "self": "https://mycompany.atlassian.net/rest/api/3/issue/61363",
+            "key": "JJ-2029",
+            "fields": {
+                "summary": "Meetings",
+                "worklog": {
+                    "startAt": 0,
+                    "maxResults": 20,
+                    "total": 6,
+                    "worklogs": [
+                        {
+                            "self": "https://mycompany.atlassian.net/rest/api/3/issue/61363/worklog/52380",
+                            "author": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "updateAuthor": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "comment": {
+                                "type": "doc",
+                                "version": 1,
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Sprint meeting (in-person)"
+                                            }
+                                        ],
+                                        "attrs": {
+                                            "localId": "3251692c6688"
+                                        }
+                                    }
+                                ]
+                            },
+                            "created": "2026-09-09T14:10:21.841+0200",
+                            "updated": "2026-09-09T14:10:21.841+0200",
+                            "started": "2026-09-09T09:00:00.000+0200",
+                            "timeSpent": "2h 30m",
+                            "timeSpentSeconds": 9000,
+                            "id": "52380",
+                            "issueId": "61363"
+                        },
+                        {
+                            "self": "https://mycompany.atlassian.net/rest/api/3/issue/61363/worklog/53464",
+                            "author": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "updateAuthor": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "comment": {
+                                "type": "doc",
+                                "version": 1,
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Quick sprint meeting"
+                                            }
+                                        ],
+                                        "attrs": {
+                                            "localId": "2e03417cb210"
+                                        }
+                                    }
+                                ]
+                            },
+                            "created": "2026-09-14T10:04:46.339+0200",
+                            "updated": "2026-09-14T10:04:46.339+0200",
+                            "started": "2026-09-14T09:30:00.000+0200",
+                            "timeSpent": "30m",
+                            "timeSpentSeconds": 1800,
+                            "id": "53464",
+                            "issueId": "61363"
+                        },
+                        {
+                            "self": "https://mycompany.atlassian.net/rest/api/3/issue/61363/worklog/53664",
+                            "author": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "updateAuthor": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "comment": {
+                                "type": "doc",
+                                "version": 1,
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Meeting for\u2026something related to user log"
+                                            }
+                                        ],
+                                        "attrs": {
+                                            "localId": "616d7494b636"
+                                        }
+                                    }
+                                ]
+                            },
+                            "created": "2026-09-14T17:59:10.038+0200",
+                            "updated": "2026-09-14T17:59:10.038+0200",
+                            "started": "2026-09-14T10:00:00.000+0200",
+                            "timeSpent": "30m",
+                            "timeSpentSeconds": 1800,
+                            "id": "53664",
+                            "issueId": "61363"
+                        },
+                        {
+                            "self": "https://mycompany.atlassian.net/rest/api/3/issue/61363/worklog/53665",
+                            "author": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "updateAuthor": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "comment": {
+                                "type": "doc",
+                                "version": 1,
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Meeting for user log updates by Dino"
+                                            }
+                                        ],
+                                        "attrs": {
+                                            "localId": "50e541f312b1"
+                                        }
+                                    }
+                                ]
+                            },
+                            "created": "2026-09-14T18:00:06.250+0200",
+                            "updated": "2026-09-14T18:00:06.250+0200",
+                            "started": "2026-09-14T11:45:00.000+0200",
+                            "timeSpent": "45m",
+                            "timeSpentSeconds": 2700,
+                            "id": "53665",
+                            "issueId": "61363"
+                        },
+                        {
+                            "self": "https://mycompany.atlassian.net/rest/api/3/issue/61363/worklog/53631",
+                            "author": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "updateAuthor": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "comment": {
+                                "type": "doc",
+                                "version": 1,
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "commissioning improvements meeting"
+                                            }
+                                        ],
+                                        "attrs": {
+                                            "localId": "b304437a5a4f"
+                                        }
+                                    }
+                                ]
+                            },
+                            "created": "2026-09-14T17:22:23.935+0200",
+                            "updated": "2026-09-14T17:22:23.935+0200",
+                            "started": "2026-09-14T16:00:00.000+0200",
+                            "timeSpent": "1h 20m",
+                            "timeSpentSeconds": 4800,
+                            "id": "53631",
+                            "issueId": "61363"
+                        },
+                        {
+                            "self": "https://mycompany.atlassian.net/rest/api/3/issue/61363/worklog/54952",
+                            "author": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "updateAuthor": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "comment": {
+                                "type": "doc",
+                                "version": 1,
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Commissioning meeting 2, clarify last stuff with Loren"
+                                            }
+                                        ],
+                                        "attrs": {
+                                            "localId": "c2600e66bd3a"
+                                        }
+                                    }
+                                ]
+                            },
+                            "created": "2026-09-18T15:05:52.572+0200",
+                            "updated": "2026-09-18T15:05:52.572+0200",
+                            "started": "2026-09-18T14:00:00.000+0200",
+                            "timeSpent": "1h 5m",
+                            "timeSpentSeconds": 3900,
+                            "id": "54952",
+                            "issueId": "61363"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+            "id": "60554",
+            "self": "https://mycompany.atlassian.net/rest/api/3/issue/60554",
+            "key": "JJ-2022",
+            "fields": {
+                "summary": "JRC and Planner, remove workaround to load config doc locally",
+                "worklog": {
+                    "startAt": 0,
+                    "maxResults": 20,
+                    "total": 1,
+                    "worklogs": [
+                        {
+                            "self": "https://mycompany.atlassian.net/rest/api/3/issue/60554/worklog/52645",
+                            "author": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "updateAuthor": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "comment": {
+                                "type": "doc",
+                                "version": 1,
+                                "content": []
+                            },
+                            "created": "2026-09-10T11:25:53.606+0200",
+                            "updated": "2026-09-10T11:25:53.606+0200",
+                            "started": "2026-09-10T10:25:48.253+0200",
+                            "timeSpent": "1h",
+                            "timeSpentSeconds": 3600,
+                            "id": "52645",
+                            "issueId": "60554"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+            "id": "59288",
+            "self": "https://mycompany.atlassian.net/rest/api/3/issue/59288",
+            "key": "JJ-2004",
+            "fields": {
+                "summary": "QA-469-[Planner] - Button not present",
+                "worklog": {
+                    "startAt": 0,
+                    "maxResults": 20,
+                    "total": 4,
+                    "worklogs": [
+                        {
+                            "self": "https://mycompany.atlassian.net/rest/api/3/issue/59288/worklog/51582",
+                            "author": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "updateAuthor": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "comment": {
+                                "type": "doc",
+                                "version": 1,
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Meeting with L/M/A for clarifications on task"
+                                            }
+                                        ],
+                                        "attrs": {
+                                            "localId": "8aabf0a28557"
+                                        }
+                                    }
+                                ]
+                            },
+                            "created": "2026-09-04T09:14:28.875+0200",
+                            "updated": "2026-09-04T09:14:28.875+0200",
+                            "started": "2026-09-03T17:15:00.000+0200",
+                            "timeSpent": "30m",
+                            "timeSpentSeconds": 1800,
+                            "id": "51582",
+                            "issueId": "59288"
+                        },
+                        {
+                            "self": "https://mycompany.atlassian.net/rest/api/3/issue/59288/worklog/51714",
+                            "author": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "updateAuthor": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "comment": {
+                                "type": "doc",
+                                "version": 1,
+                                "content": [
+                                    {
+                                        "type": "bulletList",
+                                        "content": [
+                                            {
+                                                "type": "listItem",
+                                                "attrs": {
+                                                    "localId": "6b8d22165b9f"
+                                                },
+                                                "content": [
+                                                    {
+                                                        "type": "paragraph",
+                                                        "content": [
+                                                            {
+                                                                "type": "text",
+                                                                "text": "Create template for testing"
+                                                            }
+                                                        ],
+                                                        "attrs": {
+                                                            "localId": "35831a8a7098"
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "listItem",
+                                                "attrs": {
+                                                    "localId": "06fefa229733"
+                                                },
+                                                "content": [
+                                                    {
+                                                        "type": "paragraph",
+                                                        "content": [
+                                                            {
+                                                                "type": "text",
+                                                                "text": "debug issue with target category"
+                                                            }
+                                                        ],
+                                                        "attrs": {
+                                                            "localId": "693927658e0a"
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "listItem",
+                                                "attrs": {
+                                                    "localId": "da273fee6922"
+                                                },
+                                                "content": [
+                                                    {
+                                                        "type": "paragraph",
+                                                        "content": [
+                                                            {
+                                                                "type": "text",
+                                                                "text": "came up with proposals for communicating the pinned value to JRC and Planner frontends "
+                                                            }
+                                                        ],
+                                                        "attrs": {
+                                                            "localId": "41f9f862c8ab"
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "attrs": {
+                                            "localId": "a19ade9652a1"
+                                        }
+                                    }
+                                ]
+                            },
+                            "created": "2026-09-04T12:18:06.173+0200",
+                            "updated": "2026-09-04T18:25:29.950+0200",
+                            "started": "2026-09-04T08:30:00.000+0200",
+                            "timeSpent": "4h 30m",
+                            "timeSpentSeconds": 16200,
+                            "id": "51714",
+                            "issueId": "59288"
+                        },
+                        {
+                            "self": "https://mycompany.atlassian.net/rest/api/3/issue/59288/worklog/53363",
+                            "author": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "updateAuthor": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "comment": {
+                                "type": "doc",
+                                "version": 1,
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Talked about this with D., fixed Planner, tried to understand how the hell JRC checks this\u2026"
+                                            }
+                                        ],
+                                        "attrs": {
+                                            "localId": "c90261e5195e"
+                                        }
+                                    }
+                                ]
+                            },
+                            "created": "2026-09-11T21:45:19.413+0200",
+                            "updated": "2026-09-11T21:45:19.413+0200",
+                            "started": "2026-09-11T20:13:52.013+0200",
+                            "timeSpent": "1h 30m",
+                            "timeSpentSeconds": 5400,
+                            "id": "53363",
+                            "issueId": "59288"
+                        },
+                        {
+                            "self": "https://mycompany.atlassian.net/rest/api/3/issue/59288/worklog/53666",
+                            "author": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "updateAuthor": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "comment": {
+                                "type": "doc",
+                                "version": 1,
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Discussion with D. about handling via configuration"
+                                            }
+                                        ],
+                                        "attrs": {
+                                            "localId": "3b60f65d2da3"
+                                        }
+                                    }
+                                ]
+                            },
+                            "created": "2026-09-14T18:01:44.802+0200",
+                            "updated": "2026-09-14T18:01:44.802+0200",
+                            "started": "2026-09-14T11:05:00.000+0200",
+                            "timeSpent": "40m",
+                            "timeSpentSeconds": 2400,
+                            "id": "53666",
+                            "issueId": "59288"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+            "id": "57765",
+            "self": "https://mycompany.atlassian.net/rest/api/3/issue/57765",
+            "key": "JJ-1985",
+            "fields": {
+                "summary": "Planner: update configuration in production",
+                "worklog": {
+                    "startAt": 0,
+                    "maxResults": 20,
+                    "total": 4,
+                    "worklogs": [
+                        {
+                            "self": "https://mycompany.atlassian.net/rest/api/3/issue/57765/worklog/49366",
+                            "author": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "updateAuthor": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "comment": {
+                                "type": "doc",
+                                "version": 1,
+                                "content": []
+                            },
+                            "created": "2026-08-25T16:41:02.944+0200",
+                            "updated": "2026-08-25T16:41:02.944+0200",
+                            "started": "2026-08-25T13:30:00.000+0200",
+                            "timeSpent": "15m",
+                            "timeSpentSeconds": 900,
+                            "id": "49366",
+                            "issueId": "57765"
+                        },
+                        {
+                            "self": "https://mycompany.atlassian.net/rest/api/3/issue/57765/worklog/51747",
+                            "author": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "updateAuthor": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "comment": {
+                                "type": "doc",
+                                "version": 1,
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Call with A. about this"
+                                            }
+                                        ],
+                                        "attrs": {
+                                            "localId": "10df7bdb6db9"
+                                        }
+                                    }
+                                ]
+                            },
+                            "created": "2026-09-04T14:18:47.499+0200",
+                            "updated": "2026-09-04T14:18:47.499+0200",
+                            "started": "2026-09-04T14:00:00.000+0200",
+                            "timeSpent": "15m",
+                            "timeSpentSeconds": 900,
+                            "id": "51747",
+                            "issueId": "57765"
+                        },
+                        {
+                            "self": "https://mycompany.atlassian.net/rest/api/3/issue/57765/worklog/54879",
+                            "author": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "updateAuthor": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "comment": {
+                                "type": "doc",
+                                "version": 1,
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Check all production dbs to find if this change would break existing tasks"
+                                            }
+                                        ],
+                                        "attrs": {
+                                            "localId": "bfdb300bfb16"
+                                        }
+                                    }
+                                ]
+                            },
+                            "created": "2026-09-18T11:57:49.238+0200",
+                            "updated": "2026-09-18T11:57:49.238+0200",
+                            "started": "2026-09-17T16:00:00.000+0200",
+                            "timeSpent": "1h",
+                            "timeSpentSeconds": 3600,
+                            "id": "54879",
+                            "issueId": "57765"
+                        },
+                        {
+                            "self": "https://mycompany.atlassian.net/rest/api/3/issue/57765/worklog/54917",
+                            "author": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "updateAuthor": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "comment": {
+                                "type": "doc",
+                                "version": 1,
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Update config with A. and ensure it works"
+                                            }
+                                        ],
+                                        "attrs": {
+                                            "localId": "db9f7d49c1dd"
+                                        }
+                                    }
+                                ]
+                            },
+                            "created": "2026-09-18T13:49:09.681+0200",
+                            "updated": "2026-09-18T13:49:09.681+0200",
+                            "started": "2026-09-18T13:33:43.900+0200",
+                            "timeSpent": "15m",
+                            "timeSpentSeconds": 900,
+                            "id": "54917",
+                            "issueId": "57765"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+            "id": "57520",
+            "self": "https://mycompany.atlassian.net/rest/api/3/issue/57520",
+            "key": "JJ-1977",
+            "fields": {
+                "summary": "QA-464-[Planner] - Task Lock not present",
+                "worklog": {
+                    "startAt": 0,
+                    "maxResults": 20,
+                    "total": 0,
+                    "worklogs": []
+                }
+            }
+        },
+        {
+            "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+            "id": "50692",
+            "self": "https://mycompany.atlassian.net/rest/api/3/issue/50692",
+            "key": "JJ-1760",
+            "fields": {
+                "summary": "Jilock: verify that the test environment works",
+                "worklog": {
+                    "startAt": 0,
+                    "maxResults": 20,
+                    "total": 6,
+                    "worklogs": [
+                        {
+                            "self": "https://mycompany.atlassian.net/rest/api/3/issue/50692/worklog/44557",
+                            "author": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "updateAuthor": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "comment": {
+                                "type": "doc",
+                                "version": 1,
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Meeting with Caleb"
+                                            }
+                                        ],
+                                        "attrs": {
+                                            "localId": "cf774ad07031"
+                                        }
+                                    }
+                                ]
+                            },
+                            "created": "2026-06-29T09:10:26.443+0200",
+                            "updated": "2026-06-29T09:10:26.443+0200",
+                            "started": "2026-06-18T15:35:00.000+0200",
+                            "timeSpent": "30m",
+                            "timeSpentSeconds": 1800,
+                            "id": "44557",
+                            "issueId": "50692"
+                        },
+                        {
+                            "self": "https://mycompany.atlassian.net/rest/api/3/issue/50692/worklog/46286",
+                            "author": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "updateAuthor": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "comment": {
+                                "type": "doc",
+                                "version": 1,
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Call with D. and discussion with A. and M."
+                                            }
+                                        ],
+                                        "attrs": {
+                                            "localId": "cb6ae244dc9d"
+                                        }
+                                    }
+                                ]
+                            },
+                            "created": "2026-07-15T17:47:37.025+0200",
+                            "updated": "2026-07-15T17:48:32.816+0200",
+                            "started": "2026-07-15T16:00:00.000+0200",
+                            "timeSpent": "1h 15m",
+                            "timeSpentSeconds": 4500,
+                            "id": "46286",
+                            "issueId": "50692"
+                        },
+                        {
+                            "self": "https://mycompany.atlassian.net/rest/api/3/issue/50692/worklog/49565",
+                            "author": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "updateAuthor": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "comment": {
+                                "type": "doc",
+                                "version": 1,
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Integrate link logic from jilock project into taskencoder"
+                                            }
+                                        ],
+                                        "attrs": {
+                                            "localId": "2b77f06eb254"
+                                        }
+                                    }
+                                ]
+                            },
+                            "created": "2026-08-26T17:23:38.332+0200",
+                            "updated": "2026-08-26T17:23:38.332+0200",
+                            "started": "2026-08-26T12:21:27.679+0200",
+                            "timeSpent": "5h",
+                            "timeSpentSeconds": 18000,
+                            "id": "49565",
+                            "issueId": "50692"
+                        },
+                        {
+                            "self": "https://mycompany.atlassian.net/rest/api/3/issue/50692/worklog/49703",
+                            "author": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "updateAuthor": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "comment": {
+                                "type": "doc",
+                                "version": 1,
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Unit tests for the key exchange"
+                                            }
+                                        ],
+                                        "attrs": {
+                                            "localId": "2671651fd84c"
+                                        }
+                                    }
+                                ]
+                            },
+                            "created": "2026-08-27T11:24:33.842+0200",
+                            "updated": "2026-08-27T11:24:33.842+0200",
+                            "started": "2026-08-27T09:23:00.000+0200",
+                            "timeSpent": "2h",
+                            "timeSpentSeconds": 7200,
+                            "id": "49703",
+                            "issueId": "50692"
+                        },
+                        {
+                            "self": "https://mycompany.atlassian.net/rest/api/3/issue/50692/worklog/51880",
+                            "author": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "updateAuthor": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "comment": {
+                                "type": "doc",
+                                "version": 1,
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Cleanup"
+                                            }
+                                        ],
+                                        "attrs": {
+                                            "localId": "7145e114bbe0"
+                                        }
+                                    }
+                                ]
+                            },
+                            "created": "2026-09-04T19:16:25.681+0200",
+                            "updated": "2026-09-04T19:16:25.681+0200",
+                            "started": "2026-09-04T18:16:10.083+0200",
+                            "timeSpent": "1h",
+                            "timeSpentSeconds": 3600,
+                            "id": "51880",
+                            "issueId": "50692"
+                        },
+                        {
+                            "self": "https://mycompany.atlassian.net/rest/api/3/issue/50692/worklog/51949",
+                            "author": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "updateAuthor": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "comment": {
+                                "type": "doc",
+                                "version": 1,
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Cleanup various type errors in "
+                                            },
+                                            {
+                                                "type": "text",
+                                                "text": "jilock",
+                                                "marks": [
+                                                    {
+                                                        "type": "code"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "text",
+                                                "text": " codebase and review "
+                                            },
+                                            {
+                                                "type": "text",
+                                                "text": "secret",
+                                                "marks": [
+                                                    {
+                                                        "type": "code"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "text",
+                                                "text": " module"
+                                            }
+                                        ],
+                                        "attrs": {
+                                            "localId": "b907222303ca"
+                                        }
+                                    }
+                                ]
+                            },
+                            "created": "2026-09-07T13:04:43.175+0200",
+                            "updated": "2026-09-07T13:04:43.175+0200",
+                            "started": "2026-09-07T08:45:00.000+0200",
+                            "timeSpent": "2h",
+                            "timeSpentSeconds": 7200,
+                            "id": "51949",
+                            "issueId": "50692"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+            "id": "43088",
+            "self": "https://mycompany.atlassian.net/rest/api/3/issue/43088",
+            "key": "JJ-1486",
+            "fields": {
+                "summary": "Training - Course 2",
+                "worklog": {
+                    "startAt": 0,
+                    "maxResults": 20,
+                    "total": 1,
+                    "worklogs": [
+                        {
+                            "self": "https://mycompany.atlassian.net/rest/api/3/issue/43088/worklog/54987",
+                            "author": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "updateAuthor": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "comment": {
+                                "type": "doc",
+                                "version": 1,
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "lecture 1 + notes"
+                                            }
+                                        ],
+                                        "attrs": {
+                                            "localId": "f72ed19700c2"
+                                        }
+                                    }
+                                ]
+                            },
+                            "created": "2026-09-18T16:28:55.619+0200",
+                            "updated": "2026-09-18T16:28:55.619+0200",
+                            "started": "2026-09-18T15:30:00.000+0200",
+                            "timeSpent": "1h",
+                            "timeSpentSeconds": 3600,
+                            "id": "54987",
+                            "issueId": "43088"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+            "id": "36214",
+            "self": "https://mycompany.atlassian.net/rest/api/3/issue/36214",
+            "key": "JJ-1263",
+            "fields": {
+                "summary": "Settings - Write missing unit tests",
+                "worklog": {
+                    "startAt": 0,
+                    "maxResults": 20,
+                    "total": 2,
+                    "worklogs": [
+                        {
+                            "self": "https://mycompany.atlassian.net/rest/api/3/issue/36214/worklog/54435",
+                            "author": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "updateAuthor": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "comment": {
+                                "type": "doc",
+                                "version": 1,
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Thoroughly test the POST endpoint which was completely missing tests"
+                                            }
+                                        ],
+                                        "attrs": {
+                                            "localId": "e0bf8392770e"
+                                        }
+                                    }
+                                ]
+                            },
+                            "created": "2026-09-16T17:48:22.194+0200",
+                            "updated": "2026-09-16T17:48:22.194+0200",
+                            "started": "2026-09-16T11:47:11.909+0200",
+                            "timeSpent": "6h",
+                            "timeSpentSeconds": 21600,
+                            "id": "54435",
+                            "issueId": "36214"
+                        },
+                        {
+                            "self": "https://mycompany.atlassian.net/rest/api/3/issue/36214/worklog/54638",
+                            "author": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "updateAuthor": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "comment": {
+                                "type": "doc",
+                                "version": 1,
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Review/polish tests and commit"
+                                            }
+                                        ],
+                                        "attrs": {
+                                            "localId": "c1a8f4ff3646"
+                                        }
+                                    }
+                                ]
+                            },
+                            "created": "2026-09-17T14:49:54.188+0200",
+                            "updated": "2026-09-17T14:49:54.188+0200",
+                            "started": "2026-09-17T09:49:18.995+0200",
+                            "timeSpent": "5h",
+                            "timeSpentSeconds": 18000,
+                            "id": "54638",
+                            "issueId": "36214"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+            "id": "36108",
+            "self": "https://mycompany.atlassian.net/rest/api/3/issue/36108",
+            "key": "JJ-1259",
+            "fields": {
+                "summary": "Planner - Use closest year possible in periodic iCal",
+                "worklog": {
+                    "startAt": 0,
+                    "maxResults": 20,
+                    "total": 2,
+                    "worklogs": [
+                        {
+                            "self": "https://mycompany.atlassian.net/rest/api/3/issue/36108/worklog/52883",
+                            "author": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "updateAuthor": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "comment": {
+                                "type": "doc",
+                                "version": 1,
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Evaluate issue and update leap year calculation"
+                                            }
+                                        ],
+                                        "attrs": {
+                                            "localId": "955dda6ec2c1"
+                                        }
+                                    }
+                                ]
+                            },
+                            "created": "2026-09-10T17:07:33.085+0200",
+                            "updated": "2026-09-10T17:07:33.085+0200",
+                            "started": "2026-09-10T12:30:00.000+0200",
+                            "timeSpent": "1h",
+                            "timeSpentSeconds": 3600,
+                            "id": "52883",
+                            "issueId": "36108"
+                        },
+                        {
+                            "self": "https://mycompany.atlassian.net/rest/api/3/issue/36108/worklog/55057",
+                            "author": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "updateAuthor": {
+                                "self": "https://mycompany.atlassian.net/rest/api/3/user?accountId=123456%3Aabcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "accountId": "123456:abcdefab-13b5-4c8d-9efb-dee58abc132e",
+                                "emailAddress": "mario.rossi@mycompany.com",
+                                "displayName": "Mario Rossi",
+                                "active": true,
+                                "timeZone": "Europe/Rome",
+                                "accountType": "atlassian"
+                            },
+                            "comment": {
+                                "type": "doc",
+                                "version": 1,
+                                "content": [
+                                    {
+                                        "type": "paragraph",
+                                        "content": [
+                                            {
+                                                "type": "text",
+                                                "text": "Continue implementation and try to fix tests by patching system date"
+                                            }
+                                        ],
+                                        "attrs": {
+                                            "localId": "9e2d8e4a623b"
+                                        }
+                                    }
+                                ]
+                            },
+                            "created": "2026-09-18T18:10:41.545+0200",
+                            "updated": "2026-09-19T11:48:44.313+0200",
+                            "started": "2026-09-18T16:39:56.948+0200",
+                            "timeSpent": "2h",
+                            "timeSpentSeconds": 7200,
+                            "id": "55057",
+                            "issueId": "36108"
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "isLast": true
+}

@@ -9,5 +9,8 @@ venv*/
 build/
 *.egg-info/
 
+# Tests
+.coverage
+
 # Project-specific
 config.json
