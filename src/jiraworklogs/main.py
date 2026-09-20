@@ -177,17 +177,6 @@ def jira_print_timetrack(timetrack: JiraTimetrack, show_descriptions: bool) -> N
         print()
 
 
-def jira_sprint_tasks_dictionary() -> dict[str, str]:
-    """Returns a dict that maps Jira task keys to their summary (task title)."""
-    result = jira.get_tasks_current_sprint()
-    tasks = {}
-    for issue in result["issues"]:
-        key = issue["key"]
-        summary = issue["fields"]["summary"]
-        tasks[key] = summary
-    return tasks
-
-
 # -------------------------------------------------------------------
 # ENTRY POINT
 # -------------------------------------------------------------------
