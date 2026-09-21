@@ -182,7 +182,7 @@ def jira_print_timetrack(timetrack: JiraTimetrack, show_descriptions: bool) -> N
 # -------------------------------------------------------------------
 
 
-def parse_args() -> tuple[datetime.date, bool]:
+def parse_args() -> tuple[datetime.date, bool, str | None]:
     parser = argparse.ArgumentParser(
         prog="jiraworklogs",
         description="View time spent each day on Jira tasks.",
@@ -193,6 +193,9 @@ def parse_args() -> tuple[datetime.date, bool]:
                 " Format: YYYY-MM-DD")
     parser.add_argument("--descriptions", dest="descriptions", action="store_true",
         help="Under each worklog show its description, if available.")
+    parser.add_argument("--jql", dest="jql", type=str,
+            help="Custom JQL to use instead of the default one.")
+
     args = parser.parse_args()
 
     if args.date_start is None:
@@ -204,15 +207,18 @@ def parse_args() -> tuple[datetime.date, bool]:
             print("Error while parsing the start date")
             raise
 
-    return start, args.descriptions
+    return start, args.descriptions, args.jql
 
 
 def main() -> None:
-    date_start, show_descriptions = parse_args()
+    date_start, show_descriptions, jql = parse_args()
     config = load_config_or_exit()
     jira.init(config.jira_domain, config.jira_email, config.jira_api_token)
 
-    result = jira.get_tasks_current_sprint(worklogs=True)
+    if jql:
+        result = jira.get_jql(jql, worklogs=True)
+    else:
+        result = jira.get_tasks_current_sprint(worklogs=True)
     timetrack = jira_tasks_to_timetrack(result, date_start)
     jira_print_timetrack(timetrack, show_descriptions)
 

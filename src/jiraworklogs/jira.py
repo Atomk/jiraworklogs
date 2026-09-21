@@ -48,7 +48,10 @@ def init(base_url: str, email: str, token: str):
 
 def get_tasks_current_sprint(worklogs: bool = False) -> ResponseSprint:
     jql = "assignee = currentUser() AND sprint in openSprints() ORDER BY created DESC"
+    return get_jql(jql, worklogs)
 
+
+def get_jql(jql: str, worklogs: bool = False):
     url = f"{_BASE_URL}/rest/api/3/search/jql"
     headers = {"Accept": "application/json"}
     # No fields  -->  {'issues': [{'id': '43989'}, {'id': '43956'}, {'id': '43872'}], 'isLast': True}
