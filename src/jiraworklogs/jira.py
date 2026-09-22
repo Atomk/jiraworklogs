@@ -52,6 +52,9 @@ def get_tasks_current_sprint(worklogs: bool = False) -> ResponseSprint:
 
 
 def get_jql(jql: str, worklogs: bool = False):
+    """Perform a JQL query and return the result.
+    Server will respond with error 400 for malformed JQL."""
+
     url = f"{_BASE_URL}/rest/api/3/search/jql"
     headers = {"Accept": "application/json"}
     # No fields  -->  {'issues': [{'id': '43989'}, {'id': '43956'}, {'id': '43872'}], 'isLast': True}

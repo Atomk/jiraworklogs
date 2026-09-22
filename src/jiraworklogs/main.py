@@ -8,6 +8,8 @@ import sys
 from dataclasses import dataclass
 from typing import TypedDict
 
+import requests
+
 from . import jira, utils
 from .utils import Colors
 
@@ -215,10 +217,22 @@ def main() -> None:
     config = load_config_or_exit()
     jira.init(config.jira_domain, config.jira_email, config.jira_api_token)
 
-    if jql:
-        result = jira.get_jql(jql, worklogs=True)
-    else:
-        result = jira.get_tasks_current_sprint(worklogs=True)
+    try:
+        if jql:
+            result = jira.get_jql(jql, worklogs=True)
+        else:
+            result = jira.get_tasks_current_sprint(worklogs=True)
+    except requests.exceptions.HTTPError as err:
+        resp = err.response
+        if resp is not None:
+            print(f"ERROR: server responded with status {resp.status_code} ({resp.reason})")
+            try:
+                payload = resp.json()
+                print(payload["errorMessages"][0])
+            except Exception:
+                print(resp.text)
+        sys.exit(1)
+
     timetrack = jira_tasks_to_timetrack(result, date_start)
     jira_print_timetrack(timetrack, show_descriptions)
 
