@@ -190,13 +190,13 @@ def parse_args() -> tuple[datetime.date, bool, str | None]:
         description="View time spent each day on Jira tasks.",
     )
     parser.add_argument("--start", dest="date_start", type=str,
-            help="Only consider worklogs submitted on or after this date."
-                " If omitted, will use Monday of the current week."
-                " Format: YYYY-MM-DD")
+        help="Only consider worklogs submitted on or after this date."
+            " If omitted, will use Monday of the current week."
+            " Format: YYYY-MM-DD")
     parser.add_argument("--descriptions", dest="descriptions", action="store_true",
         help="Under each worklog show its description, if available.")
     parser.add_argument("--jql", dest="jql", type=str,
-            help="Custom JQL to use instead of the default one.")
+        help="Custom JQL to use instead of the default one.")
 
     args = parser.parse_args()
 
