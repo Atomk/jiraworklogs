@@ -5,6 +5,7 @@ from unittest.mock import patch
 import pytest
 
 from jiraworklogs import main
+from jiraworklogs.utils import Colors
 
 
 @pytest.fixture(autouse=True)
@@ -53,3 +54,60 @@ class TestJiraTasksToTImeTrack:
         # TODO shouldn't this contain zero tasks since there's no records?
         assert len(result["tasks"]) == 13
         assert len(result["data"]) == 0
+
+
+class TestJiraPrintTimetrack:
+    def test_empty_timetrack(self, capsys: pytest.CaptureFixture):
+        timetrack: main.JiraTimetrack = {
+            "tasks": {},
+            "data": {},
+        }
+        main.jira_print_timetrack(timetrack, False)
+        assert capsys.readouterr().out == "no tasks found\n"
+
+    def test_no_worklogs(self, capsys: pytest.CaptureFixture):
+        timetrack: main.JiraTimetrack = {
+            "tasks": {
+                "JJ-001": "Random bug",
+                "JJ-002": "Another task",
+            },
+            "data": {},
+        }
+        main.jira_print_timetrack(timetrack, False)
+        assert capsys.readouterr().out == "found 2 tasks, but none has worklogs\n"
+
+    def test_show_descriptions(self, capsys: pytest.CaptureFixture):
+        timetrack: main.JiraTimetrack = {
+            "tasks": {
+                "JJ-001": "Random bug",
+            },
+            "data": {
+                "2026-01-01": [
+                    {"key": "JJ-001", "time": 23400, "comment": "Debugging the issue"},
+                    {"key": "JJ-001", "time": 5400, "comment": ""},
+                ],
+            },
+        }
+
+        show_descriptions = False
+        main.jira_print_timetrack(timetrack, show_descriptions)
+        stdout = capsys.readouterr().out
+        assert stdout == "\n".join([
+            f"{Colors.PURPLE}01 Jan 2026, Thu{Colors.ENDC}",
+            "- 6h 30m   JJ-001    Random bug",
+            "- 1h 30m   JJ-001    Random bug",
+            "TOTAL: 8h",
+            "",
+        ])
+
+        show_descriptions = True
+        main.jira_print_timetrack(timetrack, show_descriptions)
+        stdout = capsys.readouterr().out
+        assert stdout == "\n".join([
+            f"{Colors.PURPLE}01 Jan 2026, Thu{Colors.ENDC}",
+            "- 6h 30m   JJ-001    Random bug",
+            f"           {Colors.GRAY}Debugging the issue{Colors.ENDC}",
+            "- 1h 30m   JJ-001    Random bug",
+            "TOTAL: 8h",
+            "",
+        ])

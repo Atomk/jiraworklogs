@@ -176,7 +176,6 @@ def jira_print_timetrack(timetrack: JiraTimetrack, show_descriptions: bool) -> N
                 print(f'           {Colors.GRAY}{record["comment"]}{Colors.ENDC}')
             total_minutes += minutes
         print(f"TOTAL: {utils.timefmt(total_minutes)}")
-        print()
 
 
 # -------------------------------------------------------------------
@@ -235,6 +234,7 @@ def main() -> None:
 
     timetrack = jira_tasks_to_timetrack(result, date_start)
     jira_print_timetrack(timetrack, show_descriptions)
+    print()
 
 
 if __name__ == "__main__":
