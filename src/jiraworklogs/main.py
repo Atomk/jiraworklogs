@@ -175,7 +175,14 @@ def jira_print_timetrack(timetrack: JiraTimetrack, show_descriptions: bool) -> N
             if show_descriptions and record["comment"]:
                 print(f'           {Colors.GRAY}{record["comment"]}{Colors.ENDC}')
             total_minutes += minutes
-        print(f"TOTAL: {utils.timefmt(total_minutes)}")
+        formatted_time = utils.timefmt(total_minutes)
+        if total_minutes > 8 * 60:
+            # Maybe time was logged on the wrong day
+            print(f"TOTAL: {Colors.RED}{formatted_time}{Colors.ENDC}")
+        elif total_minutes < 8 * 60:
+            print(f"TOTAL: {Colors.YELLOW}{formatted_time}{Colors.ENDC}")
+        else:
+            print(f"TOTAL: {formatted_time}")
 
 
 # -------------------------------------------------------------------
