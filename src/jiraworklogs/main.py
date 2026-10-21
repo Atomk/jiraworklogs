@@ -47,15 +47,16 @@ class Config:
 
 
 def load_config_or_exit() -> Config:
+    config_filename = ".jiraworklogs.json"
     sample_config = {
         "jira_domain": "https://yourcompany.atlassian.net",
         "jira_email": "your.email@company.com",
         "jira_api_token": "your_jira_api_token",
     }
-    # TODO perhaps the config should be saved in another location so that it persists across reinstalls
     # TODO perhaps the file contents should be encoded in base64 so it's harder to find secrets via grep
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    config_path = os.path.join(current_dir, "config.json")
+    # Does not look like it but this should work on Windows too
+    home_dir = os.path.expanduser("~")
+    config_path = os.path.join(home_dir, config_filename)
 
     # If config file does not exist, try to create it
     if not os.path.isfile(config_path):

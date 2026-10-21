@@ -37,6 +37,9 @@ pipx install git+https://github.com/Atomk/jiraworklogs.git
 
 # If you change your mind
 pipx uninstall jiraworklogs
+
+# If you want to upgrade to the latest commit's version
+pipx reinstall jiraworklogs
 ```
 
 
